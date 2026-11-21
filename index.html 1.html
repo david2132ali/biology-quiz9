@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>بنك الأسئلة التفاعلي – علم الأحياء | الصف التاسع – د. علي داود</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1d6fb8;
+      --primary-dark: #144e86;
+      --primary-light: #e8f3fc;
+      --primary-soft: #f3f8fe;
+      --border: #c5dff5;
+      --text: #0f2942;
+      --muted: #526b84;
+      --bg: #f6faff;
+      --card: #ffffff;
+      --success: #16a34a;
+      --success-bg: #ecfdf5;
+      --success-border: #86efac;
+      --danger: #dc2626;
+      --danger-bg: #fef2f2;
+      --danger-border: #fca5a5;
+      --gold: #d97706;
+      --shadow: 0 6px 20px rgba(20, 78, 134, 0.08);
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding-bottom: 48px;
+    }
+
+    /* Top Header */
+    .hero {
+      background: linear-gradient(135deg, #e8f3fc 0%, #f5faff 100%);
+      border-bottom: 3px solid var(--primary);
+      padding: 22px 16px 20px;
+      text-align: center;
+      box-shadow: 0 4px 14px rgba(29, 111, 184, 0.08);
+    }
+
+    .institutes-bar {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #ffffff;
+      border: 1.5px solid #8ec2ee;
+      border-radius: 999px;
+      padding: 6px 20px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 8px rgba(29, 111, 184, 0.07);
+    }
+
+    .inst-badge {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .inst-sep {
+      color: #60a5fa;
+      font-weight: 800;
+    }
+
+    .doctor-name {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .hero-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .hero-sub {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    /* Stats & Quick Modes */
+    .quick-panel {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .mode-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      cursor: pointer;
+      text-align: right;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .mode-btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .mode-btn.accent-exam {
+      border-right: 5px solid var(--primary);
+    }
+
+    .mode-btn.accent-mix {
+      border-right: 5px solid #0ea5e9;
+    }
+
+    .mode-btn.accent-mistakes {
+      border-right: 5px solid var(--danger);
+    }
+
+    .mode-icon {
+      font-size: 1.75rem;
+      line-height: 1;
+    }
+
+    .mode-info h3 {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .mode-info p {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* Progress Summary Strip */
+    .summary-strip {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: var(--primary-light);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 16px;
+      margin-bottom: 22px;
+      font-size: 0.88rem;
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    .reset-link {
+      background: #ffffff;
+      border: 1px solid #93c5fd;
+      color: var(--primary-dark);
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .reset-link:hover {
+      background: #dbeafe;
+    }
+
+    /* Unit Section */
+    .unit-block {
+      margin-bottom: 26px;
+    }
+
+    .unit-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      background: var(--primary-light);
+      border-right: 5px solid var(--primary);
+      padding: 8px 14px;
+      border-radius: 10px;
+      margin-bottom: 14px;
+    }
+
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+    }
+
+    .topic-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .topic-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 24px rgba(29, 111, 184, 0.14);
+    }
+
+    .topic-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .topic-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 11px;
+      background: var(--primary-light);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .topic-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+
+    .topic-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .topic-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 10px;
+      border-top: 1px solid #edf4fb;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .q-count-pill {
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      border: 1px solid var(--border);
+      padding: 2px 10px;
+      border-radius: 999px;
+    }
+
+    .best-pill {
+      color: var(--success);
+      font-size: 0.8rem;
+    }
+
+    /* Quiz Screen (All Questions Stacked) */
+    .hidden {
+      display: none !important;
+    }
+
+    .sticky-header {
+      position: sticky;
+      top: 8px;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(6px);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px 14px 12px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 24px rgba(20, 78, 134, 0.12);
+    }
+
+    .quiz-topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 10px;
+      border: 1.5px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-lg {
+      font-size: 1rem;
+      padding: 11px 24px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-outline {
+      background: #ffffff;
+      color: var(--primary-dark);
+      border-color: var(--border);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .btn-danger {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border-color: var(--danger-border);
+    }
+
+    .btn-danger:hover {
+      background: #fee2e2;
+    }
+
+    .quiz-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 0.86rem;
+    }
+
+    .score-chip {
+      padding: 3px 10px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+    }
+
+    .score-progress {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      border: 1px solid var(--border);
+    }
+
+    .score-ok {
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1px solid var(--success-border);
+    }
+
+    .score-bad {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border: 1px solid var(--danger-border);
+    }
+
+    .timer-chip {
+      background: #fffbeb;
+      color: var(--gold);
+      border: 1px solid #fcd34d;
+      padding: 3px 10px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+    }
+
+    .progress-wrap {
+      background: #dbeafe;
+      height: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, var(--primary));
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .questions-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .question-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-right: 5px solid var(--primary);
+      border-radius: 16px;
+      padding: 18px 20px;
+      box-shadow: var(--shadow);
+      transition: border-color 0.2s ease;
+    }
+
+    .question-card.card-correct {
+      border-right-color: var(--success);
+    }
+
+    .question-card.card-wrong {
+      border-right-color: var(--danger);
+    }
+
+    .q-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .q-tag {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      border: 1px solid var(--border);
+      padding: 2px 11px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .q-text-main {
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .options-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      text-align: right;
+      font-family: inherit;
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: var(--text);
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: 11px;
+      padding: 11px 13px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      background: var(--primary-soft);
+      border-color: var(--primary);
+    }
+
+    .opt-btn:disabled {
+      cursor: default;
+    }
+
+    .opt-letter {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      border: 1px solid #93c5fd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .opt-btn.correct {
+      background: var(--success-bg);
+      border-color: var(--success);
+      color: #14532d;
+    }
+
+    .opt-btn.correct .opt-letter {
+      background: var(--success);
+      color: #ffffff;
+      border-color: var(--success);
+    }
+
+    .opt-btn.wrong {
+      background: var(--danger-bg);
+      border-color: var(--danger);
+      color: #7f1d1d;
+    }
+
+    .opt-btn.wrong .opt-letter {
+      background: var(--danger);
+      color: #ffffff;
+      border-color: var(--danger);
+    }
+
+    .feedback-box {
+      margin-top: 12px;
+      padding: 9px 13px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .feedback-ok {
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1px solid var(--success-border);
+    }
+
+    .feedback-bad {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border: 1px solid var(--danger-border);
+    }
+
+    .bottom-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    /* Results View */
+    .result-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 20px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .score-circle {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary-light);
+      border: 6px solid var(--primary);
+      color: var(--primary-dark);
+    }
+
+    .score-pct {
+      font-size: 1.9rem;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .score-frac {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .result-msg {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .result-sub {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+    }
+
+    .result-btns {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .mistakes-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .mistake-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-right: 4px solid var(--danger);
+      border-radius: 12px;
+      padding: 14px 16px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    .mistake-q {
+      font-weight: 800;
+      margin-bottom: 8px;
+      font-size: 0.98rem;
+    }
+
+    .mistake-row {
+      font-size: 0.88rem;
+      margin-top: 3px;
+    }
+
+    .m-wrong {
+      color: var(--danger);
+      font-weight: 700;
+    }
+
+    .m-right {
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-top: 28px;
+      padding: 0 12px;
+    }
+
+    @media (max-width: 720px) {
+      .options-list {
+        grid-template-columns: 1fr;
+      }
+      .inst-badge { font-size: 0.88rem; }
+      .doctor-name { font-size: 1.25rem; }
+      .hero-title { font-size: 1rem; }
+      .q-text-main { font-size: 1.02rem; }
+      .opt-btn { font-size: 0.93rem; padding: 10px 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="institutes-bar">
+      <span class="inst-badge">معهد نور البيان</span>
+      <span class="inst-sep">•</span>
+      <span class="inst-badge">معهد أجيال دمر</span>
+    </div>
+    <div class="doctor-name">د. علي داود</div>
+    <h1 class="hero-title">بنك الأسئلة التفاعلي في علم الأحياء – الصف التاسع الأساسي</h1>
+    <p class="hero-sub">300 سؤال مؤتمت مقسّمة حسب الأبحاث وفق النموذج الوزاري مع تصحيح فوري</p>
+  </header>
+
+  <main class="container">
+    <!-- HOME VIEW -->
+    <section id="homeView">
+      <div class="summary-strip">
+        <span id="overallStats">📚 إجمالي الأسئلة: 300 سؤال • 15 بحثاً شاملاً للمنهاج</span>
+        <button class="reset-link" onclick="resetProgress()">مسح السجل المحفوظ</button>
+      </div>
+
+      <div class="quick-panel">
+        <button class="mode-btn accent-exam" onclick="startRandomQuiz(6, 'نموذج امتحاني وزاري (6 أسئلة)', true)">
+          <span class="mode-icon">📝</span>
+          <div class="mode-info">
+            <h3>نموذج امتحاني وزاري</h3>
+            <p>6 أسئلة عشوائية من كامل المنهاج مع مؤقت</p>
+          </div>
+        </button>
+
+        <button class="mode-btn accent-mix" onclick="startRandomQuiz(20, 'اختبار شامل عشوائي (20 سؤالاً)', true)">
+          <span class="mode-icon">🎯</span>
+          <div class="mode-info">
+            <h3>اختبار شامل (20 سؤالاً)</h3>
+            <p>أسئلة متنوعة من جميع الوحدات لاختبار الجاهزية</p>
+          </div>
+        </button>
+
+        <button class="mode-btn accent-mistakes" onclick="startMistakesQuiz()">
+          <span class="mode-icon">🔁</span>
+          <div class="mode-info">
+            <h3>مراجعة أخطائي (<span id="mistakesCount">0</span>)</h3>
+            <p>تدرّب فقط على الأسئلة التي أخطأت فيها سابقاً</p>
+          </div>
+        </button>
+      </div>
+
+      <div id="unitsContainer"></div>
+    </section>
+
+    <!-- QUIZ VIEW (ALL QUESTIONS STACKED VERTICALLY) -->
+    <section id="quizView" class="hidden">
+      <div class="sticky-header">
+        <div class="quiz-topbar">
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <button class="btn btn-outline" onclick="goHome()">← الأبحاث</button>
+            <button class="btn btn-outline" onclick="toggleShuffleCurrent()">🔀 خلط</button>
+            <span id="quizTitleDisplay" style="color: var(--primary-dark); font-weight:800; font-size:0.95rem;"></span>
+          </div>
+          <div class="quiz-meta">
+            <span id="answeredCounter" class="score-chip score-progress">تم حل 0 / 0</span>
+            <span id="timerDisplay" class="timer-chip hidden">⏱️ 00:00</span>
+            <span class="score-chip score-ok">✔ <span id="liveCorrect">0</span></span>
+            <span class="score-chip score-bad">✘ <span id="liveWrong">0</span></span>
+          </div>
+        </div>
+        <div class="progress-wrap">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+      </div>
+
+      <div id="questionsContainer" class="questions-stack"></div>
+
+      <div class="bottom-actions">
+        <button class="btn btn-primary btn-lg" onclick="finishQuiz()">✔ إنهاء الاختبار وعرض النتيجة النهائية</button>
+        <button class="btn btn-outline" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">↑ العودة للأعلى</button>
+      </div>
+    </section>
+
+    <!-- RESULT VIEW -->
+    <section id="resultView" class="hidden">
+      <div class="result-card">
+        <div class="score-circle">
+          <div id="resPct" class="score-pct">0%</div>
+          <div id="resFrac" class="score-frac">0 / 0</div>
+        </div>
+        <div id="resMsg" class="result-msg"></div>
+        <div id="resSub" class="result-sub"></div>
+        <div class="result-btns">
+          <button class="btn btn-primary" onclick="retryQuiz()">إعادة هذا الاختبار</button>
+          <button id="retryMistakesBtn" class="btn btn-danger hidden" onclick="retrySessionMistakes()">التدرب على أخطاء هذه الجلسة</button>
+          <button class="btn btn-outline" onclick="goHome()">العودة لقائمة الأبحاث</button>
+        </div>
+      </div>
+
+      <div id="mistakesSection" class="hidden">
+        <h3 style="margin-bottom: 12px; color: var(--danger); font-size: 1.05rem;">📌 مراجعة الأسئلة التي أخطأت فيها:</h3>
+        <div id="mistakesList" class="mistakes-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    معهد نور البيان • معهد أجيال دمر | إعداد: د. علي داود — جميع الأسئلة مطابقة لمنهاج علم الأحياء للصف التاسع الأساسي
+  </footer>
+
+  <script>
+    const TOPICS = [{"id": "skeletal", "unit": "الوحدة الأولى: الدعامة والتنسيق", "title": "الهيكل العظمي والمفاصل", "icon": "🦴", "desc": "عظام الرأس والجذع والأطراف، بنية العظم الطويل، المفاصل ونمو العظام", "questions": [{"q": "أحد العظام الآتية لا يُعدّ من أقسام الهيكل العظمي المحوري:", "opts": ["عظم القص", "عظام الوجه", "عظم لوح الكتف", "العمود الفقري"], "ans": 2, "id": 1}, {"q": "يبلغ عدد عظام القحف في هيكل الرأس:", "opts": ["14 عظماً مسطحاً", "8 عظام مسطحة", "12 عظماً مسطحاً", "7 عظام مسطحة"], "ans": 1, "id": 2}, {"q": "تكون عظام الوجه ملتحمة مع بعضها بعضاً ما عدا عظم واحد متحرك لتسهيل المضغ والنطق هو:", "opts": ["العظم الجبهي", "عظم الفك العلوي", "عظم الفك السفلي", "عظم الأنف"], "ans": 2, "id": 3}, {"q": "لا تُسدّ فتحات عظام القحف عند الرضيع إلا بعمر السنة والنصف تقريباً، وذلك لـ:", "opts": ["تسهيل عملية النطق", "السماح لدماغ الرضيع بالنمو", "حماية أعضاء الحواس", "تقوية مفاصل الوجه"], "ans": 1, "id": 4}, {"q": "يبلغ العدد الكلي لفقرات العمود الفقري لدى الإنسان:", "opts": ["24 فقرة", "31 فقرة", "33 فقرة", "26 فقرة"], "ans": 2, "id": 5}, {"q": "إحدى مجموعات الفقرات الآتية تكون فقراتها ملتحمة مع بعضها بعضاً:", "opts": ["الرقبية", "الظهرية", "القطنية", "العجزية"], "ans": 3, "id": 6}, {"q": "تقع الفقرة رقم (16) في العمود الفقري ضمن الفقرات:", "opts": ["الرقبية", "الظهرية", "القطنية", "العجزية"], "ans": 1, "id": 7}, {"q": "تنشأ القناة الفقرية التي تحمي النخاع الشوكي من تتالي:", "opts": ["النتوءات الشوكية", "السطوح المفصلية", "الثقوب الفقرية", "الأقراص الغضروفية"], "ans": 2, "id": 8}, {"q": "الوظيفة الأساسية للأقراص الغضروفية الواقعة بين الفقرات هي:", "opts": ["توليد كريات الدم", "منع احتكاك الفقرات ببعضها", "ربط العضلات بالفقرات", "تشكيل النتوءات الجانبية"], "ans": 1, "id": 9}, {"q": "ترتبط الأضلاع من الخلف مع الفقرات:", "opts": ["الرقبية", "الظهرية", "القطنية", "العجزية"], "ans": 1, "id": 10}, {"q": "يُسمّى الشفعان الأخيران من الأضلاع بالأضلاع السائبة لأنهما:", "opts": ["لا يتصلان بالفقرات الظهرية", "لا يتصلان بعظم القص من الأمام", "يتصلان بعظم الترقوة", "مكونان من غضروف فقط"], "ans": 1, "id": 11}, {"q": "يبلغ عدد عظام رسغ اليد وعدد عظام رسغ القدم على الترتيب:", "opts": ["8 و 7", "7 و 8", "5 و 8", "8 و 5"], "ans": 0, "id": 12}, {"q": "العظم الذي يمنع انثناء الساق إلى الأمام ويقع في مفصل الركبة هو:", "opts": ["النتوء المرفقي", "عظم الشظية", "عظم الرضفة", "عظم الظنبوب"], "ans": 2, "id": 13}, {"q": "يقع النتوء المرفقي الذي يمنع انثناء الساعد إلى الخلف في نهاية:", "opts": ["عظم العضد السفلي", "عظم الكعبرة العلوي", "عظم الزند العلوي", "عظم لوح الكتف"], "ans": 2, "id": 14}, {"q": "يتألف الزنار الكتفي من:", "opts": ["عظمي الورك وعظمي العانة", "عظمي الترقوة ولوح الكتف", "عظمي الحرقفة وعظم العجز", "عظم القص وعظمي الترقوة"], "ans": 1, "id": 15}, {"q": "أحد العظام الآتية يُعدّ من عظام الزنار الحوضي:", "opts": ["لوح الكتف", "الترقوة", "الحرقفة", "العصعص"], "ans": 2, "id": 16}, {"q": "يبلغ عدد العظام عند الإنسان البالغ بعد التحام العديد من عظام الولادة:", "opts": ["270 عظماً", "206 عظام", "216 عظماً", "196 عظماً"], "ans": 1, "id": 17}, {"q": "نسيج يشكل طبقة رقيقة ليفية تغطي جسم العظم وغنية بالأوعية الدموية:", "opts": ["الغضروفي", "العظمي الكثيف", "السمحاق", "العظمي الإسفنجي"], "ans": 2, "id": 18}, {"q": "نسيج عظمي يوجد في المشاشتين مكون من صفائح عظمية بينها فراغات مملوءة بنقي العظم:", "opts": ["السمحاق", "النسيج العظمي الكثيف", "النسيج العظمي الإسفنجي", "النسيج الغضروفي"], "ans": 2, "id": 19}, {"q": "تُصنّف مفاصل العمود الفقري ضمن المفاصل:", "opts": ["الثابتة", "نصف المتحركة", "المتحركة", "الملتحمة"], "ans": 1, "id": 20}, {"q": "نسيج ليفي يربط بين العضلات والعظام ويسهم في تحريك العظم:", "opts": ["الرباط", "الوتر", "السمحاق", "الغضروف"], "ans": 1, "id": 21}, {"q": "المسؤول عن النمو الطولي للعظم حتى سن الثامنة عشرة هو:", "opts": ["السمحاق", "نقي العظم", "غضاريف النمو (الاتصال)", "النسيج العظمي الكثيف"], "ans": 2, "id": 22}, {"q": "المادة العظمية التي يشكلها السمحاق لتصل بين طرفي العظم المكسور تُدعى:", "opts": ["العظمين", "الدشبذ العظمي", "الغضروف", "النقي"], "ans": 1, "id": 23}, {"q": "العالم الذي صمّم طاولة لردّ الخلوع وركّب خليطة تُستعمل في الجبائر الجبسية هو:", "opts": ["ابن النفيس", "الحسن بن الهيثم", "أبو القاسم الزهراوي", "ليوناردو دافنشي"], "ans": 2, "id": 24}]}, {"id": "muscular", "unit": "الوحدة الأولى: الدعامة والتنسيق", "title": "الجهاز العضلي", "icon": "💪", "desc": "أنواع العضلات وخواصها (التنبه، التقلص، المرونة، المقوية) والكزاز العضلي", "questions": [{"q": "تشكل العضلات من وزن جسم الإنسان ما يزيد عن:", "opts": ["20%", "30%", "40%", "60%"], "ans": 2, "id": 25}, {"q": "تُعدّ أقوى عضلات جسم الإنسان وتعمل على إغلاق الفكين أثناء تناول الطعام:", "opts": ["العضلة شبه المنحرفة", "العضلة الماضغة", "العضلة العضدية الأمامية", "عضلة القلب"], "ans": 1, "id": 26}, {"q": "تُصنّف عضلات جدار المعدة والأمعاء ضمن العضلات:", "opts": ["المخططة الإرادية", "المخططة اللاإرادية", "الملساء اللاإرادية", "الملساء الإرادية"], "ans": 2, "id": 27}, {"q": "تكون استجابة العضلة المخططة الحمراء اللاإرادية (عضلة القلب):", "opts": ["بطيئة", "سريعة", "منتظمة", "عشوائية"], "ans": 2, "id": 28}, {"q": "الخاصية التي تتصف بها بعض عضلات الجسم حيث تحتفظ بتقلصها لمدة طويلة دون بذل جهد هي:", "opts": ["المرونة", "المقوية", "قابلية التقلص", "قابلية التنبه"], "ans": 1, "id": 29}, {"q": "الخاصية التي يزداد فيها طول العضلة عند التأثير فيها بقوة ما ثم تعود لوضعها الطبيعي بعد زوال التأثير هي:", "opts": ["المقوية", "المرونة", "التقلص", "التنبه"], "ans": 1, "id": 30}, {"q": "عند تقريب الساعد نحو العضد يحدث ما يلي:", "opts": ["تتقلص الأمامية وتسترخي الخلفية", "تسترخي الأمامية وتتقلص الخلفية", "تتقلص العضلتان معاً", "تسترخي العضلتان معاً"], "ans": 0, "id": 31}, {"q": "واحدة من الصفات الآتية تنطبق على العضلة المتقلصة:", "opts": ["يزداد طولها", "ينقص قطرها", "تنقص صلابتها", "يبقى حجمها ثابتاً"], "ans": 3, "id": 32}, {"q": "ينحني الرأس ويتدلى الفك السفلي أثناء النوم بسبب:", "opts": ["زيادة مرونة العضلات", "غياب خاصية المقوية واسترخاء العضلات", "زيادة تقلص العضلات", "نقص التروية الدموية"], "ans": 1, "id": 33}, {"q": "يُسمّى التشنج العضلي الشديد الناتج عن انكماش غير طوعي لعضلة واحدة أو أكثر بـ:", "opts": ["الخلع العضلي", "الكزاز العضلي", "المقوية العضلية", "التمزق الليفي"], "ans": 1, "id": 34}]}, {"id": "nervous", "unit": "الوحدة الأولى: الدعامة والتنسيق", "title": "الجهاز العصبي (العصبية)", "icon": "🧠", "desc": "الدماغ، النخاع الشوكي، السحايا، النسيج العصبي، الباحات والمنعكسات والأعصاب", "questions": [{"q": "يتألف الجهاز العصبي المركزي لدى الإنسان من:", "opts": ["الأعصاب والعقد العصبية", "الدماغ والأعصاب الشوكية", "الدماغ والنخاع الشوكي", "المخ والمخيخ فقط"], "ans": 2, "id": 35}, {"q": "الشق الذي يفصل بين الفص الجبهي والفص الجداري على سطح المخ هو:", "opts": ["شق سيلفيوس", "شق رولاندو", "الشق الخلفي (القائم)", "الشق الأمامي الخلفي"], "ans": 1, "id": 36}, {"q": "يفصل شق سيلفيوس على سطح المخ بين الفصين:", "opts": ["الجبهي والجداري", "الجبهي والصدغي", "الصدغي والقفوي", "الجداري والقفوي"], "ans": 1, "id": 37}, {"q": "يقع بين نصفي الكرة المخيخية فص متوسط عليه شقوق معترضة يُسمّى:", "opts": ["الفص الشمي", "الفص الدودي", "الفص القفوي", "مثلث المخ"], "ans": 1, "id": 38}, {"q": "كتلة عصبية بيضاء اللون مخروطية الشكل تتصل من الأعلى بالحدبة الحلقية ومن الأسفل بالنخاع الشوكي:", "opts": ["المخيخ", "السويقتان المخيتان", "البصلة السيسائية", "الجسم الثفني"], "ans": 2, "id": 39}, {"q": "الترتيب الصحيح للبنى العصبية على الوجه السفلي للدماغ من الخلف إلى الأمام (بدءاً من البصلة السيسائية) هو:", "opts": ["البصلة – السويقتان – الحدبة – الفصان الشميان", "البصلة – الحدبة الحلقية – السويقتان – تصالب العصبين البصريين – الفصان الشميان", "الفصان الشميان – تصالب العصبين البصريين – الحدبة الحلقية – البصلة", "البصلة – الحدبة الحلقية – الفصان الشميان – تصالب العصبين البصريين"], "ans": 1, "id": 40}, {"q": "صفيحة من مادة بيضاء تصل نصفي الكرة المخية ببعضهما وتقع تحت الجسم الثفني:", "opts": ["الفص الدودي", "مثلث المخ", "الحدبة الحلقية", "السويقة المخية"], "ans": 1, "id": 41}, {"q": "الرباط الضام الذي يثبت النخاع الشوكي بنهاية القناة الفقرية يُدعى:", "opts": ["قناة السيساء", "الخيط الانتهائي", "الأم الجافية", "الجذر الأمامي"], "ans": 1, "id": 42}, {"q": "تتوضع المادة الرمادية في النخاع الشوكي بشكل:", "opts": ["محيطي", "مركزي يأخذ شكل فراشة", "صفائح عرضية", "قشري خارجي"], "ans": 1, "id": 43}, {"q": "يمتاز الثلم الأمامي في النخاع الشوكي مقارنة بالثلم الخلفي بأنه:", "opts": ["ضيق وعميق", "متسع وقليل العمق", "متسع وعميق", "ضيق وقليل العمق"], "ans": 1, "id": 44}, {"q": "الترتيب الصحيح لأغشية السحايا من الخارج نحو الداخل هو:", "opts": ["الأم الحنون – العنكبوتي – الجافية", "الأم الجافية – الحنون – العنكبوتي", "الأم الجافية – العنكبوتي – الحنون", "العنكبوتي – الجافية – الحنون"], "ans": 2, "id": 45}, {"q": "الغشاء السحائي الرقيق الغني بالأوعية الدموية الذي يلتصق بقوة وعمق بالمراكز العصبية ويغذيها هو:", "opts": ["الأم الجافية", "الغشاء العنكبوتي", "الأم الحنون", "الحاجز الدماغي"], "ans": 2, "id": 46}, {"q": "يوجد السائل الدماغي الشوكي الداخلي في:", "opts": ["فراغات الغشاء العنكبوتي", "بطينات الدماغ وقناة السيساء", "الأم الجافية", "الحيز تحت الجافية"], "ans": 1, "id": 47}, {"q": "الخلايا التي تسهم في بنية النسيج العصبي وتعمل على دعم العصبونات وحمايتها تُدعى:", "opts": ["خلايا شوان", "خلايا الدبق العصبي", "الخلايا الحسية", "الخلايا الميلانينية"], "ans": 1, "id": 48}, {"q": "قسم من الخلية العصبية يستقبل التنبيه وينقله باتجاه جسم الخلية:", "opts": ["المحوار الأسطواني", "الأزرار الانتهائية", "الاستطالات الهيولية", "غمد النخاعين"], "ans": 2, "id": 49}, {"q": "يتركب غمد النخاعين الذي يعطي المادة البيضاء لونها الأبيض الصدفي من مادة:", "opts": ["بروتينية سكرية", "دهنية فوسفورية", "مخاطية كلسية", "ليفية ضامة"], "ans": 1, "id": 50}, {"q": "الترتيب الصحيح لاتجاه نقل السيالة العصبية ضمن العصبون هو:", "opts": ["جسم الخلية – استطالات – محوار – أزرار", "استطالات هيولية – جسم الخلية – محوار – أزرار", "أزرار – محوار – جسم الخلية – استطالات", "محوار – استطالات – جسم الخلية – أزرار"], "ans": 1, "id": 51}, {"q": "تقع باحة الإحساسات العامة في قشرة المخ في الفص:", "opts": ["الجبهي أمام شق رولاندو", "الجداري خلف شق رولاندو", "الصدغي أسفل سيلفيوس", "القفوي خلف الشق القائم"], "ans": 1, "id": 52}, {"q": "تقع الباحة السمعية والباحة البصرية في قشرة المخ على الترتيب في الفصين:", "opts": ["الصدغي والقفوي", "القفوي والصدغي", "الجداري والجبهي", "الجبهي والقفوي"], "ans": 0, "id": 53}, {"q": "إحدى البنى العصبية الآتية تسهم في ضبط الفعاليات العضلية السريعة كالجري والعزف الموسيقي:", "opts": ["المخ", "المخيخ", "البصلة السيسائية", "النخاع الشوكي"], "ans": 1, "id": 54}, {"q": "يقع مركز المنعكسات البصلية كحركات التنفس وإفراز اللعاب في:", "opts": ["المادة البيضاء للبصلة", "المادة الرمادية للبصلة", "المادة الرمادية للنخاع", "قشرة المخ"], "ans": 1, "id": 55}, {"q": "يُعدّ إفراز العرق والمشي اللاشعوري من المنعكسات التي يقع مركزها في:", "opts": ["المخيخ", "المادة الرمادية للنخاع الشوكي", "المادة الرمادية للبصلة", "الباحة المحركة في المخ"], "ans": 1, "id": 56}, {"q": "الترتيب الصحيح لعناصر القوس الانعكاسية في الفعل المنعكس الشوكي هو:", "opts": ["مستقبل حسي – عصبون محرك – واصل – حسي – عضو منفذ", "مستقبل حسي – عصبون حسي – عصبون واصل – عصبون محرك – عضو منفذ", "عضو منفذ – عصبون حسي – واصل – محرك – مستقبل حسي", "مستقبل حسي – عصبون واصل – حسي – محرك – عضو منفذ"], "ans": 1, "id": 57}, {"q": "عند وخز أصابع الطرف الخلفي لضفدع مُخرّب الدماغ ونخاعه الشوكي سليم، فإن النتيجة تكون:", "opts": ["عدم ثني الطرف الخلفي", "ثني الطرف الخلفي المنبّه", "استجابة بحركات إرادية", "موت الضفدع فوراً"], "ans": 1, "id": 58}, {"q": "يبلغ عدد الأعصاب الدماغية (القحفية) وعدد الأعصاب الشوكية على الترتيب:", "opts": ["31 شفعاً و 12 شفعاً", "12 شفعاً و 31 شفعاً", "10 أشفاع و 33 شفعاً", "12 عصباً و 31 عصباً"], "ans": 1, "id": 59}, {"q": "العصب الدماغي الوحيد الذي يصل إلى الأحشاء في الصدر والبطن هو العصب:", "opts": ["البصري", "الشمي", "العاشر (الرئوي المعدي)", "المحرك اللساني"], "ans": 2, "id": 60}, {"q": "يتميز الجذر الخلفي للعصب الشوكي عن الجذر الأمامي بـ:", "opts": ["أنه محرك بلا عقدة", "أنه حسي ويحوي عقدة شوكية", "أنه مختلط", "اتصاله بالدماغ مباشرة"], "ans": 1, "id": 61}, {"q": "يُصنّف العصب المحرك اللساني من الناحية الوظيفية ضمن الأعصاب:", "opts": ["الحسية", "الحركية (المفرزة)", "المختلطة", "الذاتية فقط"], "ans": 1, "id": 62}, {"q": "تُعدّ الأعصاب الشوكية أعصاباً مختلطة لأنها:", "opts": ["تتصل بالدماغ والنخاع", "تنقل السيالة باتجاه واحد", "تنقل السيالة باتجاهين متعاكسين", "تحوي أليافاً عديمة الغمد"], "ans": 2, "id": 63}, {"q": "ينتج عن قطع الجذر الأمامي لعصب شوكي لدى الضفدع:", "opts": ["فقدان الحساسية فقط", "شلل في المنطقة المتصلة به", "شلل وفقدان حس معاً", "عدم تأثر المنطقة"], "ans": 1, "id": 64}, {"q": "ينتج عن قطع الجذر الخلفي لعصب شوكي لدى الضفدع:", "opts": ["شلل في المنطقة المتصلة به", "فقدان الحساسية في المنطقة", "تضاعف سرعة الحركة", "شلل وفقدان حس معاً"], "ans": 1, "id": 65}, {"q": "تعمل الجملة الودية والجملة قرب الودية في الجهاز العصبي الذاتي بشكل متعاكس، حيث تقوم الجملة الودية بـ:", "opts": ["تضييق حدقة العين", "توسيع حدقة العين", "إيقاف الجهاز الهضمي نهائياً", "التحكم بالحركات الإرادية"], "ans": 1, "id": 66}]}, {"id": "endocrine", "unit": "الوحدة الأولى: الدعامة والتنسيق", "title": "الغدد الصم وهرموناتها (الغدية)", "icon": "⚗️", "desc": "النخامية، الدرقية، جارات الدرقية، الكظرية، البنكرياس، الصنوبرية واضطراباتها", "questions": [{"q": "إحدى الغدد الآتية لا تنتمي إلى نوع الغدد الصم (داخلية الإفراز):", "opts": ["الغدة النخامية", "الغدة الكظرية", "الغدة العرقية", "الغدة الدرقية"], "ans": 2, "id": 67}, {"q": "تُعدّ غدة البنكرياس (المعثكلة) غدة مختلطة لأنها:", "opts": ["تقع في تجويفين مختلفين", "تحوي خلايا داخلية وخارجية الإفراز", "تفرز هرمونين متعاكسين", "تصب بالجلد والدم معاً"], "ans": 1, "id": 68}, {"q": "أصغر الغدد الصم وتقع على الوجه السفلي للدماغ وتنظم عمل معظم الغدد الصم الأخرى:", "opts": ["الغدة الصنوبرية", "الغدة الدرقية", "الغدة النخامية", "الغدة الكظرية"], "ans": 2, "id": 69}, {"q": "العنصر الكيميائي الذي يدخل في تركيب هرمون التيروكسين الذي تفرزه الغدة الدرقية هو:", "opts": ["الحديد", "الكالسيوم", "اليود", "البوتاسيوم"], "ans": 2, "id": 70}, {"q": "الهرمون الذي تفرزه الغدد جارات الدرقية ويزيد من إخراج الكالسيوم من العظام إلى الدم هو:", "opts": ["الكالسيتونين", "الباراثورمون", "التيروكسين", "الكورتيزول"], "ans": 1, "id": 71}, {"q": "تجمعات من خلايا غدية محاطة بالأوعية الدموية تقع في مؤخرة المعثكلة:", "opts": ["الغدد جارات الدرقية", "جزر لانغرهانس", "الغدة الصنوبرية", "قشر الكظر"], "ans": 1, "id": 72}, {"q": "يبلغ المستوى الطبيعي لسكر العنب (الغلوكوز) في دم الإنسان تقريباً:", "opts": ["0.5 غ / لتر", "1 غ / لتر", "2 غ / لتر", "5 غ / لتر"], "ans": 1, "id": 73}, {"q": "الهرمون الذي يرفع نسبة سكر العنب في الدم عند انخفاضه بتفكيك الغليكوجين في الكبد هو:", "opts": ["الأنسولين", "الغلوكاغون", "التيروكسين", "الميلاتونين"], "ans": 1, "id": 74}, {"q": "يُفرز هرمون الكورتيزول المنظم لنسبة ملح الطعام والماء في الجسم من:", "opts": ["لب الكظر", "قشر الكظر", "الغدة النخامية", "الغدة الدرقية"], "ans": 1, "id": 75}, {"q": "الهرمون الذي يُفرز من لب الكظر ليحذّر الجسم في حالات الخوف والخطر هو:", "opts": ["الكورتيزول", "الأدرينالين", "الباراثورمون", "الغلوكاغون"], "ans": 1, "id": 76}, {"q": "الغدة الصماء التي تقع داخل الدماغ وتفرز هرمون الميلاتونين المنظم للساعة البيولوجية هي:", "opts": ["الغدة النخامية", "الغدة الدرقية", "الغدة الصنوبرية", "الغدة الكظرية"], "ans": 2, "id": 77}, {"q": "مواد كيميائية ينتجها النبات في قمم الفروع الهوائية وتسبب نمو الخلايا واستطالتها تُدعى:", "opts": ["الهرمونات الحيوانية", "الأوكسينات", "الأنظيمات", "الكلوروفيل"], "ans": 1, "id": 78}, {"q": "ينتج عن نقص إفراز هرمون النمو في سن مبكرة (قصور الغدة النخامية) حالة تُسمّى:", "opts": ["العملقة", "القزامة", "تضخم غير متناسق للأطراف", "داء أديسون"], "ans": 1, "id": 79}, {"q": "يتميز المصاب بحالة القزامة النخامية بأنه:", "opts": ["يعاني من خمول في القوى العقلية", "بنيته غير مشوهة وقواه العقلية كاملة لكنه لا ينضج جنسياً", "يتجاوز طوله 2 متر", "يعاني من تضخم غير متناسق في الأطراف"], "ans": 1, "id": 80}, {"q": "ينتج عن زيادة إفراز هرمون النمو في مرحلة البلوغ:", "opts": ["القزامة", "العملقة المتناسقة", "تضخم غير متناسق لعظام الوجه والأطراف", "هشاشة العظام"], "ans": 2, "id": 81}, {"q": "الحالة المرضية الناتجة عن نقص إفراز هرمون الكورتيزول من قشر الكظر هي:", "opts": ["داء السكري", "داء أديسون", "التكزز العضلي", "العملقة"], "ans": 1, "id": 82}, {"q": "يؤدي زيادة إفراز هرمون الباراثورمون إلى سحب الكالسيوم من العظام وحدوث:", "opts": ["التكزز العضلي", "هشاشة العظام", "زيادة الوزن", "انخفاض ضغط الدم"], "ans": 1, "id": 83}, {"q": "ينتج عن نقص إفراز هرمون الباراثورمون (نقص الكالسيوم في الدم):", "opts": ["هشاشة العظام", "التكزز العضلي (تشنج مؤلم)", "داء السكري", "نقص الوزن"], "ans": 1, "id": 84}]}, {"id": "receptors_eye", "unit": "الوحدة الأولى: الدعامة والتنسيق", "title": "المستقبلات الحسية: العين والرؤية", "icon": "👁️", "desc": "بنية كرة العين، الأوساط الشفافة، آلية الرؤية والمطابقة، وعيوب الرؤية", "questions": [{"q": "تسكن كرة العين داخل تجويف عظمي في الجمجمة يُدعى:", "opts": ["تجويف القحف", "تجويف الحجاج", "التجويف الصدغي", "التجويف الأنفي"], "ans": 1, "id": 85}, {"q": "يتألف جهاز العضلات المحركة لكرة العين من:", "opts": ["أربع عضلات مستقيمة", "ست عضلات (4 مستقيمة و2 منحرفتان)", "ست عضلات (2 مستقيمتان و4 منحرفات)", "ثلاث عضلات إرادية"], "ans": 1, "id": 86}, {"q": "الطبقة الخارجية البيضاء من جدار كرة العين والتي تتحدب من الأمام وتشفّ لتشكل القرنية الشفافة هي:", "opts": ["المشيمية", "الشبكية", "الصلبة", "الملتحمة"], "ans": 2, "id": 87}, {"q": "يُعدّ جوف كرة العين مظلماً لأن:", "opts": ["الصلبة لونها أبيض", "الوجه الداخلي للمشيمية أسود", "الخلط الزجاجي معتم", "الشبكية تمنع مرور الضوء"], "ans": 1, "id": 88}, {"q": "يختلف لون عيون البشر من شخص لآخر باختلاف لون:", "opts": ["الحدقة", "الملتحمة", "القزحية", "الجسم الهدبي"], "ans": 2, "id": 89}, {"q": "فتحة دائرية وسط القزحية يتغير قطرها تبعاً لشدة الإضاءة بفعل انعكاسي:", "opts": ["اللطخة الصفراء", "النقطة العمياء", "الحدقة", "الحفيرة المركزية"], "ans": 2, "id": 90}, {"q": "تنعدم الرؤية في النقطة العمياء (مكان خروج العصب البصري) بسبب:", "opts": ["قلة الأوعية الدموية فيها", "خلوها من العصي والمخاريط", "احتوائها على عصي فقط", "بعدها عن الجسم البلوري"], "ans": 1, "id": 91}, {"q": "تبلغ قوة البصر شدتها في الحفيرة المركزية لاحتوائها على:", "opts": ["عصي فقط", "مخاريط فقط", "عصي ومخاريط بالتساوي", "خلايا دبقية فقط"], "ans": 1, "id": 92}, {"q": "الترتيب الصحيح للأوساط الشفافة في العين من الأمام إلى الخلف (حسب مسار الضوء) هو:", "opts": ["القرنية – البلوري – المائي – الزجاجي", "القرنية الشفافة – الخلط المائي – الجسم البلوري – الخلط الزجاجي", "الخلط المائي – القرنية – البلوري – الزجاجي", "القرنية – الزجاجي – البلوري – المائي"], "ans": 1, "id": 93}, {"q": "الوسط الشفاف الذي يملأ الحجرة الخلفية لكرة العين ويكون على شكل كتلة هلامية هو:", "opts": ["الخلط المائي", "الجسم البلوري", "الخلط الزجاجي", "القرنية الشفافة"], "ans": 2, "id": 94}, {"q": "تعتمد القرنية الشفافة في تغذيتها (لخلوها من الأوعية الدموية) على الانتشار من:", "opts": ["الخلط الزجاجي", "الخلط المائي", "الدموع", "الملتحمة"], "ans": 1, "id": 95}, {"q": "صفات الخيال المتشكل للجسم المرئي على شبكية العين هي:", "opts": ["وهمي ومعتدل وأصغر", "حقيقي ومقلوب وأكبر", "حقيقي ومقلوب وأصغر", "حقيقي ومعتدل وأصغر"], "ans": 2, "id": 96}, {"q": "عملية ضبط وإحكام آلي لتوضع الخيال على الشبكية يقوم بها الجسم البلوري بتغيير تحدب وجهه الأمامي تُدعى:", "opts": ["التكيف", "المطابقة", "التوحيد", "الانعكاس"], "ans": 1, "id": 97}, {"q": "يتغير قطر الحدقة في الإضاءة القوية والضعيفة على الترتيب كما يلي:", "opts": ["تتوسع في القوية وتتضيق في الضعيفة", "تتضيق في القوية وتتوسع في الضعيفة", "تبقى ثابتة في الحالتين", "تنغلق تماماً في القوية"], "ans": 1, "id": 98}, {"q": "الخلايا الحسية البصرية التي تعمل على إدراك البيئة المحيطة في ظروف الإضاءة الضعيفة ولا تميز الألوان هي:", "opts": ["المخاريط فقط", "العصي فقط", "العصي والمخاريط معاً", "خلايا القزحية"], "ans": 1, "id": 99}, {"q": "يبلغ عدد العصي وعدد المخاريط في شبكية العين على الترتيب تقريباً:", "opts": ["7 ملايين و 130 مليوناً", "130 مليوناً و 7 ملايين", "130 مليوناً و 130 مليوناً", "7 ملايين و 70 مليوناً"], "ans": 1, "id": 100}, {"q": "يقع خيال الأجسام القريبة لدى المصاب بمد البصر (الطمس):", "opts": ["أمام الشبكية", "خلف الشبكية", "على الشبكية", "على النقطة العمياء"], "ans": 1, "id": 101}, {"q": "من أسباب الإصابة بقصر البصر (الحسر):", "opts": ["نقص طول المحور الأمامي الخلفي", "زيادة طول المحور الأمامي الخلفي", "قلة تحدب الجسم البلوري", "قلة مرونة الجسم البلوري"], "ans": 1, "id": 102}, {"q": "يُصحّح قصر البصر (الحسر) باستخدام نظارات ذات عدسات:", "opts": ["مقرّبة (محدبة)", "مبعّدة (مقعرة)", "مستوية", "أسطوانية"], "ans": 1, "id": 103}, {"q": "أحد عيوب الرؤية يصيب الإنسان بعد سن (45 – 50) سنة بسبب قلة مرونة الجسم البلوري مع بقاء قطر العين طبيعياً:", "opts": ["قصر البصر (الحسر)", "مد البصر (الطمس)", "مد البصر الشيخي (القدع)", "الرمد الربيعي"], "ans": 2, "id": 104}, {"q": "الأجسام التي لا يراها المصاب بمد البصر الشيخي (القدع) بوضوح هي:", "opts": ["الأجسام البعيدة", "الأجسام القريبة", "الأجسام الملونة فقط", "الأجسام المتحركة فقط"], "ans": 1, "id": 105}, {"q": "يُعالج كل من مد البصر (الطمس) ومد البصر الشيخي (القدع) بنظارات ذات عدسات:", "opts": ["مبعّدة (مقعرة)", "مقرّبة (محدبة)", "لاصقة ملونة فقط", "مستوية"], "ans": 1, "id": 106}, {"q": "من المضاعفات والأضرار التي قد يسببها استخدام العدسات اللاصقة:", "opts": ["زيادة مرونة الجسم البلوري", "ندوب وتقرحات في القرنية وعدوى جرثومية", "نقص طول المحور الأمامي الخلفي", "توسع دائم في الحدقة"], "ans": 1, "id": 107}, {"q": "العالم الذي أثبت أن الضوء يأتي من الأجسام إلى العين لا العكس وأول من شرّح العين تشريحاً كاملاً هو:", "opts": ["ابن النفيس", "أبو القاسم الزهراوي", "الحسن بن الهيثم", "وليم هارفي"], "ans": 2, "id": 108}]}, {"id": "receptors_other", "unit": "الوحدة الأولى: الدعامة والتنسيق", "title": "المستقبلات الحسية: الأذن والأنف واللسان والجلد", "icon": "👂", "desc": "حواس السمع والتوازن، الشم، التذوق، وبنية الجلد وملحقاته", "questions": [{"q": "تتألف الأذن الخارجية من ثلاثة أجزاء هي:", "opts": ["الصيوان والمطرقة وغشاء الطبل", "الصيوان وقناة السمع الخارجية وغشاء الطبل", "الصيوان والدهليز والقوقعة", "قناة السمع والمطرقة والسندان"], "ans": 1, "id": 109}, {"q": "وظيفة الالتواءات الموجودة على صيوان الأذن هي:", "opts": ["إفراز المادة الشمعية", "تجميع الأصوات وتوجيهها وتحديد اتجاهها", "حفظ توازن الجسم", "تضخيم الاهتزازات الصوتية"], "ans": 1, "id": 110}, {"q": "المادة الشمعية الصفراء التي تفرزها غدد قناة السمع الخارجية لمنع دخول الغبار والجراثيم تُدعى:", "opts": ["الميلانين", "الصملاخ", "المخاط", "الزهم"], "ans": 1, "id": 111}, {"q": "غشاء جلدي رقيق مائل يقع في نهاية قناة السمع الخارجية ويفصل الأذن الخارجية عن الوسطى:", "opts": ["النافذة البيضية", "غشاء الطبل", "النافذة المدورة", "الملتحمة"], "ans": 1, "id": 112}, {"q": "تقع الأذن الوسطى داخل حجرة صغيرة يؤمّن لها الحماية عظم:", "opts": ["العظم الجبهي", "العظم الصدغي", "العظم الجداري", "العظم القفوي"], "ans": 1, "id": 113}, {"q": "الترتيب الصحيح لعظيمات السمع الثلاث في الأذن الوسطى من الخارج إلى الداخل هو:", "opts": ["الركاب – السندان – المطرقة", "المطرقة – السندان – الركاب", "السندان – المطرقة – الركاب", "المطرقة – الركاب – السندان"], "ans": 1, "id": 114}, {"q": "العظم السمعي الذي يتصل بغشاء الطبل والعظم الذي يغطي النافذة البيضية على الترتيب هما:", "opts": ["المطرقة والركاب", "الركاب والمطرقة", "السندان والركاب", "المطرقة والسندان"], "ans": 0, "id": 115}, {"q": "قناة تكون عادة مغلقة وتفتح بحركات كالبلع والتثاؤب لتجعل ضغط الهواء متساوياً على جانبي غشاء الطبل:", "opts": ["قناة السيساء", "قناة (نفير) أوستاش", "قناة السمع الخارجية", "القناة الهلالية"], "ans": 1, "id": 116}, {"q": "يقع المستقبل السمعي الذي يضم الخلايا الحسية السمعية في الأذن الداخلية داخل:", "opts": ["القريبة", "الكييس", "القوقعة (الحلزون)", "القنوات الهلالية"], "ans": 2, "id": 117}, {"q": "تتضخم الاهتزازات الصوتية بشكل كبير عندما تصل إلى النافذة البيضية لأن:", "opts": ["مساحة غشاء النافذة البيضية أصغر من غشاء الطبل", "مساحة غشاء الطبل أصغر من النافذة البيضية", "قناة أوستاش تضخم الصوت", "عظيمات السمع مجوفة"], "ans": 0, "id": 118}, {"q": "تستقبل أذن الإنسان الاهتزازات الصوتية التي يتراوح تواترها بين:", "opts": ["10 – 1000 هرتز", "20 – 20000 هرتز", "200 – 200000 هرتز", "50 – 5000 هرتز"], "ans": 1, "id": 119}, {"q": "الأجزاء المسؤولة في الأذن الداخلية عن حفظ التوازن أثناء الحركة وأثناء السكون على الترتيب هي:", "opts": ["القريبة والكييس / القنوات الهلالية", "القنوات الهلالية الثلاث / القريبة والكييس", "الحلزون / الدهليز", "المطرقة والسندان / الركاب"], "ans": 1, "id": 120}, {"q": "يُقسم الأنف من الداخل إلى حفرتين أنفيتين بوساطة:", "opts": ["حاجز عظمي", "حاجز غضروفي", "ثلاث قرينات", "غشاء مخاطي أصفر"], "ans": 1, "id": 121}, {"q": "يُبطّن الغشاء المخاطي الأحمر (التنفسي):", "opts": ["أعلى التجويف الأنفي", "أسفل التجويف الأنفي", "سقف الفم فقط", "البلعوم فقط"], "ans": 1, "id": 122}, {"q": "أحد المكونات الآتية غير موجود في الغشاء المخاطي الأحمر (التنفسي) للأنف:", "opts": ["الأوعية الدموية", "الغدد المخاطية", "الأشعار", "الخلايا الحسية الشمية"], "ans": 3, "id": 123}, {"q": "تُسهم الأوعية الدموية في الغشاء المخاطي الأحمر للأنف في:", "opts": ["ترطيب الهواء", "تدفئة الهواء الداخل للرئتين", "تنقية الهواء من الغبار", "استقبال الروائح"], "ans": 1, "id": 124}, {"q": "يُعدّ تنبيه أهداب الخلايا الحسية الشمية في الغشاء المخاطي الأصفر تنبيهاً:", "opts": ["حرارياً", "كيميائياً", "آلياً", "ضوئياً"], "ans": 1, "id": 125}, {"q": "جميع الشروط الآتية واجب توافرها في المادة ليكون لها رائحة ما عدا:", "opts": ["أن تكون غازية أو قابلة للتطاير", "أن تكون قابلة للانحلال في المخاط", "أن تلامس أسفل التجويف الأنفي فقط", "أن يكون لها تركيز مناسب"], "ans": 2, "id": 126}, {"q": "تضعف حاسة الشم في حالة الزكام لأن الغشاء المخاطي للأنف يكون:", "opts": ["جافاً في بدايته وكثير الرطوبة في نهايته", "كثير الرطوبة في بدايته وجافاً في نهايته", "مغطى بالأشعار الكثيفة", "خالياً من الأوعية الدموية"], "ans": 0, "id": 127}, {"q": "للشم علاقة بتسريع عملية الهضم لأن الرائحة الشهية للطعام تؤدي إلى:", "opts": ["توسع المريء", "زيادة إفراز العصارات الهاضمة", "إغلاق اللهاة", "زيادة حركة اللسان"], "ans": 1, "id": 128}, {"q": "يُثبّت اللسان في الفم من:", "opts": ["ثلثه الأمامي ويبقى ثلثاه الخلفيان حرّين", "ثلثيه الخلفيين ويبقى ثلثه الأمامي حرّاً", "نهايته الأمامية والخلفية معاً", "جانبيه فقط"], "ans": 1, "id": 129}, {"q": "جميع الحليمات اللسانية الآتية تحوي براعم ذوقية ما عدا الحليمات:", "opts": ["الكأسية", "الكمئية", "التويجية", "الخيطية"], "ans": 3, "id": 130}, {"q": "إحدى الحليمات اللسانية الآتية لا تحوي براعم ذوقية ولها دور لمسي فقط:", "opts": ["الكأسية", "الخيطية", "التويجية", "الكمئية"], "ans": 1, "id": 131}, {"q": "تخرج أهداب الخلايا الحسية الذوقية في البرعم الذوقي من فتحة صغيرة تُدعى:", "opts": ["الثقب", "السم", "المسام", "الفوهة"], "ans": 1, "id": 132}, {"q": "من الشروط الواجب توافرها في المادة كي يكون لها طعم:", "opts": ["أن تكون غازية متطايرة", "أن تكون قابلة للانحلال في اللعاب وبتركيز معين", "أن تلامس الوجه السفلي للسان", "أن تكون صلبة غير منحلة"], "ans": 1, "id": 133}, {"q": "لا يستطيع الإنسان تمييز طعم الأطعمة على الوجه السفلي من اللسان بسبب:", "opts": ["عدم وجود اللعاب فيه", "عدم وجود براعم ذوقية فيه", "كثرة الحليمات الكأسية فيه", "قلة الأوعية الدموية فيه"], "ans": 1, "id": 134}, {"q": "تنتقل السيالة العصبية الذوقية عبر ألياف الأعصاب الذوقية إلى باحة التذوق الواقعة في الفص:", "opts": ["القفوي", "الصدغي", "الجبهي", "الجداري"], "ans": 1, "id": 135}, {"q": "الطبقة من البشرة التي تتألف من خلايا ميتة متقرنة تتساقط دورياً هي:", "opts": ["الطبقة المولدة", "الطبقة السطحية", "طبقة الأدمة", "تحت الأدمة"], "ans": 1, "id": 136}, {"q": "الطبقة من الجلد التي تولّد خلايا جديدة باستمرار وتنشأ منها الأشعار والأظافر ولها دور في التئام الجروح:", "opts": ["السطحية", "المولدة", "الأدمة", "الكتل الدهنية تحت الأدمة"], "ans": 1, "id": 137}, {"q": "تتحدد درجة لون الجلد الأسمر وتُمتص الأشعة فوق البنفسجية الضارة بفضل صباغ:", "opts": ["الهيموغلوبين", "الميلانين", "الكاروتين", "الصفراء"], "ans": 1, "id": 138}, {"q": "يغطي الشعر مناطق الجسم المختلفة بنسب متفاوتة باستثناء:", "opts": ["الرأس والعنق", "راحتي اليدين وأخمص القدمين والشفتين", "الذراعين والساقين", "الظهر والصدر"], "ans": 1, "id": 139}, {"q": "ينتصب الشعر عند الشعور بالبرد أو الخوف الشديدين بسبب تقلص:", "opts": ["الغدة الدهنية", "العضلة الناصبة للشعرة", "الغدة العرقية", "الطبقة السطحية"], "ans": 1, "id": 140}, {"q": "لا نشعر بالألم عند قص الشعر والأظافر لأن قسمهما الأمامي:", "opts": ["مليء بالأوعية الدموية", "يخلو من النهايات العصبية", "مغطى بصباغ الميلانين", "يتصل بالأدمة مباشرة"], "ans": 1, "id": 141}, {"q": "إحدى غدد الجلد الآتية تُسهم مفرزاتها في ليونة الجلد ونعومة الأشعار:", "opts": ["الغدد العرقية", "الغدد الدهنية", "الغدد المخاطية", "غدة الثدي"], "ans": 1, "id": 142}, {"q": "تنشأ غدد الجلد (العرقية والدهنية والمخاطية وغدة الثدي) من طبقة:", "opts": ["البشرة السطحية", "الأدمة", "الكتل الدهنية", "الأظافر"], "ans": 1, "id": 143}, {"q": "تنتشر النهايات العصبية الحرة المسؤولة عن الإحساس بالألم في:", "opts": ["البشرة", "الكتل الدهنية تحت الأدمة", "ساق الشعرة", "مقدمة الأظافر"], "ans": 0, "id": 144}, {"q": "تحوي أدمة الجلد جسيمات حسية مسؤولة عن جميع الإحساسات الآتية ما عدا:", "opts": ["اللمس", "الحرارة والبرودة", "الضغط", "الألم"], "ans": 3, "id": 145}, {"q": "تُعدّ وظيفة منطقة البشرة في الجلد:", "opts": ["توليد كريات الدم", "خط الدفاع الأول لمنع دخول الجراثيم وتسرب الماء", "إفراز العرق والدهن", "تخزين الدهون"], "ans": 1, "id": 146}]}, {"id": "health_unit1", "unit": "الوحدة الأولى: الدعامة والتنسيق", "title": "صحة أجهزة الدعامة والتنسيق", "icon": "🩺", "desc": "التعب العضلي، الكساح، هشاشة العظام، التهاب السحايا وأضرار المنبهات والتدخين", "questions": [{"q": "يُصاب الرياضيون بالتعب العضلي عند العمل الشاق بسبب تراكم:", "opts": ["غاز الأوكسجين وسكر العنب", "حمض اللبن وغاز ثنائي أوكسيد الكربون", "أملاح الكالسيوم واليود", "صباغ الميلانين"], "ans": 1, "id": 147}, {"q": "يُنصح الرياضيون بالاستحمام بالماء الدافئ بعد ممارسة الرياضة من أجل:", "opts": ["تقوية عظام القحف", "تنشيط الدورة الدموية والتخلص من فضلات العضلات", "تقليل إفراز الميلانين", "إغلاق مسام الجلد"], "ans": 1, "id": 148}, {"q": "يُنصح الأطباء بعدم الإكثار من تناول التوابل والبهارات حفاظاً على سلامة:", "opts": ["غشاء الطبل", "الحليمات والبراعم الذوقية", "القرنية الشفافة", "الأقراص الغضروفية"], "ans": 1, "id": 149}, {"q": "يصاب الأطفال بمرض الكساح (طرى وتقوس عظام الساقين) بسبب نقص:", "opts": ["فيتامين A", "فيتامين B", "فيتامين C", "فيتامين D"], "ans": 3, "id": 150}, {"q": "الوظيفة الأساسية لفيتامين (D) في بناء العظام هي:", "opts": ["توليد كريات الدم الحمر", "تثبيت أملاح الكالسيوم على مادة العظمين", "توسيع القناة المركزية", "تكوين الغضاريف"], "ans": 1, "id": 151}, {"q": "واحدة من الصفات الآتية لا تنطبق على مرض هشاشة العظام:", "opts": ["نقص متزايد في كثافة العظم", "تصبح عظام الساقين طرية ومقوسة عند الأطفال", "زيادة احتمالية الإصابة بالكسور", "ارتفاع نسبة الإصابة به عند النساء بعد سن اليأس"], "ans": 1, "id": 152}, {"q": "يتم تشخيص مرض التهاب السحايا (الجرثومي أو الفيروسي) عبر فحص:", "opts": ["الدم الوريدي فقط", "السائل الدماغي الشوكي", "سائل الجنب", "الخلط المائي"], "ans": 1, "id": 153}, {"q": "المادة التي تسبب اضطراباً في التوازن والحركة وتشويش الوعي ويؤدي إدمانها إلى تشمع الكبد هي:", "opts": ["الشاي والقهوة", "الأدوية المسكنة", "المشروبات الكحولية (الغولية)", "التبغ"], "ans": 2, "id": 154}, {"q": "يمنع غاز أحادي أوكسيد الكربون (CO) الناتج عن التدخين وصول غاز الأوكسجين إلى:", "opts": ["الشعر والأظافر", "الخلايا العصبية", "مينا السن", "القناة الفقرية"], "ans": 1, "id": 155}]}, {"id": "digestive", "unit": "الوحدة الثانية: وظائف التغذية", "title": "الجهاز الهضمي والامتصاص", "icon": "🍽️", "desc": "السبيل الهضمي والأسنان، الغدد الهاضمة، الأنظيمات، الكيموس والكيلوس والامتصاص", "questions": [{"q": "أحد الأعضاء الآتية لا يُعدّ من أقسام السبيل الهضمي بل من الغدد الهاضمة:", "opts": ["المريء", "المعدة", "الكبد", "المعي الغليظ"], "ans": 2, "id": 156}, {"q": "يبلغ عدد الأسنان اللبنية وعدد الأسنان الدائمة (قبل ظهور أضراس العقل) في الفكين على الترتيب:", "opts": ["20 سناً و 28 سناً", "28 سناً و 32 سناً", "16 سناً و 28 سناً", "20 سناً و 32 سناً"], "ans": 0, "id": 157}, {"q": "تبدأ أضراس العقل بالظهور بعد سن (15 – 18) سنة ليصبح العدد الكلي للأسنان الدائمة:", "opts": ["28 سناً", "30 سناً", "32 سناً", "36 سناً"], "ans": 2, "id": 158}, {"q": "الطبقة القاسية اللامعة التي تغطي تاج السن وتحميه هي:", "opts": ["العاج", "الميناء", "الملاط", "لب السن"], "ans": 1, "id": 159}, {"q": "الطبقة التي تغطي جذر السن هي:", "opts": ["الميناء", "العاج", "الملاط", "اللثة"], "ans": 2, "id": 160}, {"q": "الجزء من السن الذي يملأ قناة السن ويحتوي على شعيرات دموية وأعصاب تنقل حس الألم هو:", "opts": ["الميناء", "العاج", "لب السن", "الملاط"], "ans": 2, "id": 161}, {"q": "القسم من السبيل الهضمي الذي يُعدّ ملتقى الطريقين الهضمي والتنفسي هو:", "opts": ["الحنجرة", "البلعوم", "المريء", "الرغامى"], "ans": 1, "id": 162}, {"q": "بروز عضلي يتدلى من سقف البلعوم ويغلق تجويف الأنف أثناء البلع لمنع عودة الطعام إليه:", "opts": ["لسان المزمار", "اللهاة", "العضلة الفؤادية", "الحبال الصوتية"], "ans": 1, "id": 163}, {"q": "العضو الذي يغلق فتحة الحنجرة في أثناء البلع حتى لا يدخل الغذاء إلى مجرى التنفس هو:", "opts": ["اللهاة", "لسان المزمار", "البلعوم", "العضلة البوابية"], "ans": 1, "id": 164}, {"q": "يبلغ طول المريء الواقع خلف الرغامى نحو (25 سم) ويتركب جداره من عضلات لا إرادية:", "opts": ["طولية ودائرية ومائلة", "طولية ودائرية", "دائرية فقط", "مخططة إرادية"], "ans": 1, "id": 165}, {"q": "تقع المعدة في الجهة اليسرى أعلى تجويف البطن ويتركب جدارها من عضلات ملساء لا إرادية:", "opts": ["طولية ودائرية فقط", "طولية ودائرية ومائلة", "مائلة فقط", "مخططة لا إرادية"], "ans": 1, "id": 166}, {"q": "العضلة التي تقع في نهاية المعدة ولا تفتح إلا عند مرور الغذاء إلى الاثني عشر هي:", "opts": ["العضلة الفؤادية", "العضلة البوابية", "المصرة البولية", "عضلة الحجاب الحاجز"], "ans": 1, "id": 167}, {"q": "يبلغ طول المعي الدقيق وقطره تقريباً على الترتيب:", "opts": ["1.5 متر و 7 – 10 سم", "6 أمتار و 3 سم", "3 أمتار و 6 سم", "6 أمتار و 10 سم"], "ans": 1, "id": 168}, {"q": "أكبر غدة في جسم الإنسان بنية اللون وتقع أعلى التجويف البطني على يمين المعدة هي:", "opts": ["البنكرياس", "الكبد", "الغدة النكفية", "الغدة الدرقية"], "ans": 1, "id": 169}, {"q": "يقع الحويصل الصفراوي (المرارة) الذي تختزن فيه العصارة الصفراوية على:", "opts": ["الوجه العلوي للكبد", "الوجه السفلي للكبد", "مؤخرة البنكرياس", "بداية المعي الغليظ"], "ans": 1, "id": 170}, {"q": "تُعدّ المادة الغذائية الآتية لا تُهضم ولا تُمتص في السبيل الهضمي ولكنها تسهل إفراغ المعي:", "opts": ["النشاء", "البروتينات", "السيللوز", "الدسم"], "ans": 2, "id": 171}, {"q": "يقوم أنظيم الأميلاز اللعابي في الفم بتحويل النشاء المطبوخ هضماً جزئياً إلى:", "opts": ["سكر العنب (الغلوكوز)", "سكر الشعير (سكر ثنائي)", "عديدات ببتيد", "حموض دسمة"], "ans": 1, "id": 172}, {"q": "الأنظيم الموجود في العصارة المعدية والذي يفكك البروتينات جزئياً إلى عديدات ببتيد في وسط حمضي هو:", "opts": ["الأميلاز اللعابي", "الببسين", "الأملاح الصفراوية", "الأنسولين"], "ans": 1, "id": 173}, {"q": "إحدى العصارات الهاضمة الآتية لا تحتوي على أنظيمات هاضمة بل تحتوي على أملاح قلوية تجزّئ الدسم إلى مستحلب:", "opts": ["اللعابية", "المعدية", "الصفراوية", "المعثكلية"], "ans": 2, "id": 174}, {"q": "الناتج النهائي لهضم النشاء المطبوخ في المعي الدقيق هو:", "opts": ["سكر الشعير", "سكر العنب (الغلوكوز)", "الحموض الأمينية", "الغليسرول"], "ans": 1, "id": 175}, {"q": "الناتج النهائي لهضم البروتينات في المعي الدقيق هو:", "opts": ["عديدات الببتيد", "الحموض الأمينية", "الحموض الدسمة", "سكر العنب"], "ans": 1, "id": 176}, {"q": "يتم في المعي الدقيق هضم مستحلب الدسم وينتج عن هضمه النهائي:", "opts": ["حموض أمينية وغليسرول", "حموض دسمة وغليسرول", "سكر العنب وماء", "عديدات ببتيد"], "ans": 1, "id": 177}, {"q": "سائل يشبه الحساء وحمضي التفاعل يتشكل في نهاية الهضم المعدي وينبه عضلة البواب:", "opts": ["الكيلوس", "الكيموس", "المستحلب", "البلغم"], "ans": 1, "id": 178}, {"q": "سائل لبني القوام وقلوي التفاعل يتشكل في نهاية الهضم المعوي في المعي الدقيق:", "opts": ["الكيموس", "الكيلوس", "العصارة الصفراوية", "اللعاب"], "ans": 1, "id": 179}, {"q": "تسلك نواتج الهضم النهائية للدسم (حموض دسمة وغليسرول والفيتامينات الذوابة بالدسم) عند الامتصاص طريق:", "opts": ["الشعيرات الدموية", "الأوعية البلغمية", "المعي الغليظ", "الوريد الأجوف السفلي مباشرة"], "ans": 1, "id": 180}, {"q": "جميع المواد الآتية تُمتص عبر الطريق الدموي (الشعيرات الدموية) في الزغابة المعوية ما عدا:", "opts": ["سكر العنب", "الحموض الأمينية", "الفيتامينات المنحلة بالماء", "الحموض الدسمة والغليسرول"], "ans": 3, "id": 181}, {"q": "تتمثل الوظيفة الأساسية للمعي الغليظ (الأعور والقولون والمستقيم) في:", "opts": ["هضم البروتينات والدسم", "امتصاص الماء والأملاح من بقايا الغذاء غير المهضوم", "إفراز العصارة الصفراوية", "امتصاص سكر العنب"], "ans": 1, "id": 182}]}, {"id": "circulatory", "unit": "الوحدة الثانية: وظائف التغذية", "title": "جهاز الدوران والدم والبلغم (الدموية)", "icon": "❤️", "desc": "القلب والدسامات، دورتا الدم، مكونات الدم، الزمر الدموية، والجهاز البلغمي", "questions": [{"q": "الغشاء القليل المرونة الذي يحيط بالقلب فيحميه ويمنع تمدده يُدعى:", "opts": ["غشاء الجنب", "غشاء التامور", "المحفظة الليفية", "السحايا"], "ans": 1, "id": 183}, {"q": "يُقسم القلب إلى قسمين أيمن وأيسر بوساطة:", "opts": ["الدسام الإكليلي", "حاجز طولي", "الدسامات السينية", "غشاء التامور"], "ans": 1, "id": 184}, {"q": "جدار البطين الأيسر أكثر ثخانة من جدار البطين الأيمن لأنه يدفع الدم إلى:", "opts": ["الرئتين فقط", "كامل أنحاء الجسم عبر الشريان الأبهر", "الأذينة اليسرى", "الأذينة اليمنى"], "ans": 1, "id": 185}, {"q": "يقع الدسام الإكليلي (التاجي) المكون من صفيحتين تربطهما أوتار بين:", "opts": ["الأذينة اليمنى والبطين الأيمن", "الأذينة اليسرى والبطين الأيسر", "البطين الأيمن والشريان الرئوي", "البطين الأيسر والشريان الأبهر"], "ans": 1, "id": 186}, {"q": "الدسام الذي يقع بين الأذينة اليمنى والبطين الأيمن ويتكون من ثلاث صفائح مرنة هو:", "opts": ["الدسام الإكليلي", "الدسام ثلاثي الشرف", "الدسام السيني", "الدسام المعوي"], "ans": 1, "id": 187}, {"q": "تقع الدسامات السينية (ثلاثة أغشية هلالية) في فوهة كل من:", "opts": ["الأوردة الرئوية", "الوريدين الأجوفين", "الشريانين الأبهر والرئوي", "الأذينتين"], "ans": 2, "id": 188}, {"q": "الأوعية الدموية الدقيقة التي يحدث ضمنها التبادل الحقيقي للمواد الغذائية والغازات بين الدم والخلايا هي:", "opts": ["الشرايين", "الأوردة", "الشعيرات الدموية", "الأوعية البلغمية"], "ans": 2, "id": 189}, {"q": "تصب الأوردة الرئوية الأربعة في القلب داخل:", "opts": ["الأذينة اليمنى", "الأذينة اليسرى", "البطين الأيمن", "البطين الأيسر"], "ans": 1, "id": 190}, {"q": "يصب الوريدان الأجوفان العلوي والسفلي في القلب داخل:", "opts": ["الأذينة اليمنى", "الأذينة اليسرى", "البطين الأيمن", "البطين الأيسر"], "ans": 0, "id": 191}, {"q": "يتراوح معدل ضربات القلب الطبيعي لدى الإنسان في الدقيقة الواحدة بين:", "opts": ["40 – 50 ضربة", "65 – 75 ضربة", "90 – 110 ضربات", "120 – 140 ضربة"], "ans": 1, "id": 192}, {"q": "تبدأ الدورة الدموية الصغرى من البطين الأيمن (دم قاتم) عبر الشريان الرئوي وتنتهي في:", "opts": ["الأذينة اليمنى (دم قاتم)", "الأذينة اليسرى (دم قانئ)", "البطين الأيسر (دم قانئ)", "خلايا الجسم"], "ans": 1, "id": 193}, {"q": "تبدأ الدورة الدموية الكبرى من البطين الأيسر (دم قانئ) عبر الشريان الأبهر وتنتهي في:", "opts": ["الأذينة اليسرى", "الأذينة اليمنى (دم قاتم)", "البطين الأيمن", "الرئتين"], "ans": 1, "id": 194}, {"q": "العالم العربي الذي اكتشف الدورة الدموية الصغرى والعالم الذي اعتمد على أبحاثه لاكتشاف الدورة الكبرى على الترتيب هما:", "opts": ["ابن الهيثم وابن النفيس", "ابن النفيس ووليم هارفي", "الزهراوي ووليم هارفي", "وليم هارفي وابن النفيس"], "ans": 1, "id": 195}, {"q": "تُقدّر كمية الدم في جسم إنسان وزنه 65 كغ تقريباً بـ:", "opts": ["2 ليتر", "5 ليترات", "8 ليترات", "10 ليترات"], "ans": 1, "id": 196}, {"q": "تُعدّ كريات الدم الحمراء خلايا قرصية الشكل مجردة من النواة، وتعيش نحو:", "opts": ["30 يوماً", "60 يوماً", "120 يوماً", "365 يوماً"], "ans": 2, "id": 197}, {"q": "تتخرب كريات الدم الحمراء المسنّة في:", "opts": ["نقي العظم فقط", "الكبد والطحال", "القلب والرئتين", "الكليتين والمثانة"], "ans": 1, "id": 198}, {"q": "يتحد خضاب الدم (الهيموغلوبين) مع غاز الأوكسجين في الرئتين مكوناً مركباً أحمر قانئاً يُسمّى:", "opts": ["كاربامين خضاب الدم", "خضاب الدم المؤكسج", "فحم خضاب الدم", "المصورة"], "ans": 1, "id": 199}, {"q": "يتحد خضاب الدم مع غاز ثنائي أوكسيد الكربون في الخلايا مكوناً مركباً أحمر قاتماً يُسمّى:", "opts": ["خضاب الدم المؤكسج", "كاربامين خضاب الدم", "فحم خضاب الدم", "الهيموغلوبين الحر"], "ans": 1, "id": 200}, {"q": "ينتج عن اتحاد خضاب الدم مع غاز أحادي أوكسيد الكربون (CO) مركب صعب التفكك يؤدي للاختناق يُسمّى:", "opts": ["خضاب الدم المؤكسج", "كاربامين خضاب الدم", "فحم خضاب الدم", "مولد الليفين"], "ans": 2, "id": 201}, {"q": "تُدافع كريات الدم البيضاء عن الجسم بفضل امتلاكها خاصيتي:", "opts": ["التخثر والنقل", "البلعمة وإفراز الأضداد", "التقلص والمرونة", "الارتصاص والتمايز"], "ans": 1, "id": 202}, {"q": "يبلغ عدد الكريات البيض في كل 1 ملم³ من الدم نحو:", "opts": ["5 ملايين كرية", "6 – 8 آلاف كرية", "150 – 400 ألف كرية", "100 – 150 ألف كرية"], "ans": 1, "id": 203}, {"q": "مكونات دموية عديمة النواة تنشأ في نقي العظم وتتفتت عند ملامسة الهواء لتُسهم في تخثر الدم:", "opts": ["الكريات الحمر", "الكريات البيض", "الصفيحات الدموية", "المصورة"], "ans": 2, "id": 204}, {"q": "يبلغ عدد الصفيحات الدموية في كل 1 ملم³ من الدم نحو:", "opts": ["6 – 8 آلاف صفيحة", "150 – 400 ألف صفيحة", "5 ملايين صفيحة", "50 – 80 ألف صفيحة"], "ans": 1, "id": 205}, {"q": "تؤدي مصورة الدم (البلازما) التي يشكل الماء 90% منها وظيفة إطراحية عبر نقلها:", "opts": ["سكر العنب والأملاح", "الأضداد والهرمونات", "البولة وحمض البول وغاز CO₂", "الحموض الأمينية"], "ans": 2, "id": 206}, {"q": "الطبيب الذي اكتشف وجود أربعة أنواع من الزمر الدموية عند الإنسان هو:", "opts": ["ابن النفيس", "وليم هارفي", "كارل لاند ستاينر", "مارسيلو مالبيكي"], "ans": 2, "id": 207}, {"q": "تكون الراصة الموجودة في مصورة الدم لصاحب الزمرة الدموية (AB) هي:", "opts": ["الراصة a فقط", "الراصة b فقط", "الراصتان a و b معاً", "غير موجودة"], "ans": 3, "id": 208}, {"q": "يُسمّى صاحب الزمرة الدموية (O) معطياً عاماً لـ:", "opts": ["احتواء دمه على مولدتي A و B", "خلو دمه من أي مولدة ارتصاص", "خلو مصورته من أي راصة", "وجود عامل الريزوس لديه"], "ans": 1, "id": 209}, {"q": "مريض زمرته الدموية (A) يحتاج إلى نقل دم، فإن الزمر التي يمكن أن يأخذ منها هي:", "opts": ["A و B", "A و O", "A و AB", "B و O"], "ans": 1, "id": 210}, {"q": "يُعدّ البلغم (اللمف) سائلاً أصفر شفافاً يشبه تركيب المصورة إلا أنه خالٍ من:", "opts": ["الماء", "الكريات البيض", "الكريات الحمر", "المواد الغذائية"], "ans": 2, "id": 211}, {"q": "تُعدّ العقد البلغمية (نحو 600 عقدة) قلاعاً دفاعية ضد الجراثيم لأنها:", "opts": ["تولد الكريات الحمر", "تتكاثر ضمنها البلغميات التي تقضي على الجراثيم", "تفرز العصارة الصفراوية", "تخزن الكالسيوم"], "ans": 1, "id": 212}, {"q": "أكبر الأوعية البلغمية التي تجمع البلغم وتصبه في الوريد الأجوف العلوي هي:", "opts": ["الشريان الأبهر", "القناة الصدرية", "الوريد الكلوي", "الشريان الرئوي"], "ans": 1, "id": 213}, {"q": "عضو بلغمي يقع في الجهة اليسرى أعلى تجويف البطن خلف المعدة:", "opts": ["اللوزتان", "الزائدة الدودية", "الطحال", "الغدة التيموسية"], "ans": 2, "id": 214}, {"q": "عضو بلغمي يقع تحت الفك السفلي على جانبي العنق ويتضخم عند حدوث التهاب:", "opts": ["الطحال", "اللوزتان", "الغدة التيموسية", "الزائدة الدودية"], "ans": 1, "id": 215}, {"q": "تقع الغدة التيموسية (أحد الأعضاء البلغمية) في:", "opts": ["الجهة اليمنى أسفل البطن", "التجويف الصدري أعلى القلب", "الجهة اليسرى خلف المعدة", "القناة المركزية للعظم"], "ans": 1, "id": 216}]}, {"id": "respiratory", "unit": "الوحدة الثانية: وظائف التغذية", "title": "جهاز التنفس", "icon": "🫁", "desc": "أقسام جهاز التنفس، الحنجرة والرغامى، آلية الشهيق والزفير وتبادل الغازات", "questions": [{"q": "تُعدّ الحنجرة عضو التصويت، وتختلف أصوات البشر بين فرد وآخر بسبب اختلاف:", "opts": ["حجم الرئتين", "طول وتواتر الحبال الصوتية", "عدد حلقات الرغامى", "سماكة غشاء الجنب"], "ans": 1, "id": 217}, {"q": "أنبوب غضروفي مرن يقع داخل التجويف الصدري أمام المريء حلقاته ناقصة الاستدارة وجداره الخلفي عضلي:", "opts": ["الحنجرة", "الرغامى", "القصبة الهوائية", "البلعوم"], "ans": 1, "id": 218}, {"q": "تكون الحلقات الغضروفية في القصبتين الهوائيتين والقصيبات:", "opts": ["ناقصة الاستدارة", "كاملة الاستدارة", "معدومة تماماً", "متحركة عشوائياً"], "ans": 1, "id": 219}, {"q": "تُحاط الرئتان بغشاء مضاعف يُدعى غشاء الجنب يفرز سائل الجنب الذي يعمل على:", "opts": ["تنقية الهواء من الغبار", "تسهيل حركة الرئتين أثناء التنفس", "إنتاج الطاقة في الخلايا", "امتصاص الأوكسجين"], "ans": 1, "id": 220}, {"q": "إحدى حالات عضلة الحجاب الحاجز تساعد على دخول الهواء إلى الرئتين (الشهيق):", "opts": ["تسترخي وترتفع للأعلى", "تتقلص وتنخفض للأسفل", "تسترخي وتنخفض للأسفل", "تتقلص وترتفع للأعلى"], "ans": 1, "id": 221}, {"q": "إحدى حالات عضلة الحجاب الحاجز تساعد على خروج الهواء من الرئتين (الزفير):", "opts": ["تتقلص وتنخفض للأسفل", "تسترخي وترتفع للأعلى", "تتقلص وترتفع للأعلى", "تسترخي وتنخفض للأسفل"], "ans": 1, "id": 222}, {"q": "أحد الغازات الآتية لا يشارك بعملية التنفس وتبقى نسبته ثابتة (78%) في هواء الشهيق والزفير:", "opts": ["الأوكسجين", "ثنائي أوكسيد الكربون", "الآزوت", "بخار الماء"], "ans": 2, "id": 223}, {"q": "تبلغ النسبة المئوية لغاز الأوكسجين في هواء الشهيق وفي هواء الزفير على الترتيب:", "opts": ["21% و 16.4%", "16.4% و 21%", "78% و 4.2%", "0.04% و 4.2%"], "ans": 0, "id": 224}, {"q": "أجزاء من الحويصل الرئوي يحدث في مستواها تبادل الغازات بين الهواء والدم:", "opts": ["القصيبات", "الأسناخ الرئوية", "الرغامى", "الحبال الصوتية"], "ans": 1, "id": 225}, {"q": "يتعذر على الرئتين تخليص الدم من غاز CO₂ إذا بلغت نسبته في هواء الشهيق:", "opts": ["0.04%", "1%", "4.2%", "10%"], "ans": 1, "id": 226}]}, {"id": "excretory", "unit": "الوحدة الثانية: وظائف التغذية", "title": "الإطراح والجهاز البولي وصحة التغذية", "icon": "💧", "desc": "الاستقلاب، أعضاء الإطراح، بنية الكلية وعملها، وأمراض أجهزة التغذية", "questions": [{"q": "التفاعلات التي يتم فيها أكسدة المواد الغذائية في الخلايا بأوكسجين الهواء لإنتاج الطاقة والفضلات هي تفاعلات:", "opts": ["البناء", "الهدم", "الامتصاص", "الانتاش"], "ans": 1, "id": 227}, {"q": "يُعدّ كل من الأعضاء الآتية عضواً إطراحياً ما عدا:", "opts": ["الكبد", "الجلد", "المعي الغليظ", "جهاز التنفس"], "ans": 2, "id": 228}, {"q": "لا يُصنّف المعي الغليظ كعضو إطراحي لأن الفضلات التي يطرحها:", "opts": ["سائلة دائماً", "فضلات غير استقلابية لا تنتج عن الهدم في الخلايا", "غنية بالأملاح المعدنية فقط", "تنتج عن الكليتين"], "ans": 1, "id": 229}, {"q": "المسار الصحيح لخروج البول من الجسم هو:", "opts": ["كليتان – مثانة – حالبان – إحليل", "كليتان – حالبان – مثانة – إحليل", "مثانة – كليتان – حالبان – إحليل", "كليتان – حالبان – إحليل – مثانة"], "ans": 1, "id": 230}, {"q": "عضلة إرادية على شكل حلقة تسمح للبول بالمرور من المثانة إلى المجرى الخارجي (الإحليل):", "opts": ["العضلة البوابية", "المصرة البولية", "العضلة الفؤادية", "الحجاب الحاجز"], "ans": 1, "id": 231}, {"q": "تقع أهرامات مالبيكي (10 – 12 هرماً) داخل الكلية في:", "opts": ["المحفظة الليفية", "المنطقة القشرية البنية", "المنطقة اللبية الحمراء", "الحالب"], "ans": 2, "id": 232}, {"q": "جوف أبيض داخل الكلية تنفتح فيه ذرى أهرامات مالبيكي بثقوب صغيرة:", "opts": ["المثانة", "الحويضة", "القشرة", "المحفظة الليفية"], "ans": 1, "id": 233}, {"q": "الوعاء الدموي الذي يحمل الغذاء والأوكسجين والفضلات الاستقلابية إلى الكلية في مراحل تنقية الدم هو:", "opts": ["الوريد الكلوي", "الشريان الكلوي", "الشريان الرئوي", "الوريد الأجوف العلوي"], "ans": 1, "id": 234}, {"q": "وحدات مجهرية صغيرة في الكلية تنقي الدم من عناصر البول المختلفة (البولة وحمض البول):", "opts": ["الحويصلات الرئوية", "الأنابيب البولية (النفرونات)", "الزغابات المعوية", "العقد البلغمية"], "ans": 1, "id": 235}, {"q": "تبلغ نسبة الماء في البول ونسبته في العرق على الترتيب:", "opts": ["99% و 96%", "96% و 99%", "90% و 99%", "96% و 90%"], "ans": 1, "id": 236}, {"q": "يُقدّر عدد الغدد العرقية في جلد الإنسان تقريباً بـ:", "opts": ["600 غدة", "3 ملايين غدة", "100 ألف غدة", "5 ملايين غدة"], "ans": 1, "id": 237}, {"q": "يُنصح بتجنب الإكثار من تناول إحدى المواد الآتية للحفاظ على صحة الكليتين والكبد (لأنها تزيد البولة وحمض البول):", "opts": ["ألياف السيللوز", "البروتينات الحيوانية", "الفيتامينات", "الماء"], "ans": 1, "id": 238}, {"q": "يُنصح بتجنب الإكثار من شرب الماء في أثناء تناول الطعام لأنه:", "opts": ["يسبب ارتفاع ضغط الدم", "يمدّد العصارات الهاضمة", "يسبب الحصيات البولية", "يمنع امتصاص الأوكسجين"], "ans": 1, "id": 239}, {"q": "يُنصح الأطباء بعدم الإكثار من تناول ملح الطعام للوقاية من:", "opts": ["الإمساك", "ارتفاع ضغط الدم", "فقر الدم", "تسوس الأسنان"], "ans": 1, "id": 240}, {"q": "مرض فيروسي يصيب الكبد ويؤدي إلى اصفرار لون الجلد والعينين والبول هو:", "opts": ["فقر الدم (الأنيميا)", "التهاب الكبد (اليرقان)", "التلاسيميا", "داء النقرس"], "ans": 1, "id": 241}, {"q": "ينتج مرض فقر الدم (الأنيميا) عن نقص عدد الكريات الحمر أو انخفاض الخضاب بسبب نقص:", "opts": ["فيتامين D والكالسيوم", "أملاح الحديد وفيتامين B", "اليود والصوديوم", "ألياف السيللوز"], "ans": 1, "id": 242}, {"q": "شخص أظهر تحليله الدموي انخفاضاً حاداً في عدد الصفيحات الدموية (100 ألف/ملم³)، فإنه يعاني من:", "opts": ["حالة التهابية", "فقر الدم", "صعوبة تخثر الدم", "اليرقان"], "ans": 2, "id": 243}]}, {"id": "genetics", "unit": "الوحدة الثالثة: الوراثة والتكاثر", "title": "الوراثة والصبغيات والانقسام الخلوي", "icon": "🧬", "desc": "الصبغيات والـ DNA، الانقسام الخيطي والمنصف، الصفات الوراثية والمكتسبة والطفرات", "questions": [{"q": "قطعة من إحدى سلسلتي الـ DNA ترمز لتركيب بروتين معين يحدد صفة الكائن الحي:", "opts": ["النواة", "المورثة", "البلاسميد", "العروس"], "ans": 1, "id": 244}, {"q": "أحد الكائنات الحية الآتية يُعدّ من بدائيات النوى وقد يحتوي على DNA حلقي يُسمّى البلاسميد:", "opts": ["النباتات", "الجراثيم", "الفطريات", "الإنسان"], "ans": 1, "id": 245}, {"q": "تُعدّ الفطريات من حقيقيات النوى لأن المادة الوراثية في نوى خلاياها:", "opts": ["موجودة في الهيولى", "محاطة بغلاف نووي", "تتألف من صبغي حلقي واحد", "خالية من الـ DNA"], "ans": 1, "id": 246}, {"q": "يبلغ عدد الصبغيات في نوى الخلايا الجسمية لدى الإنسان وفي نوى خلايا البصل على الترتيب:", "opts": ["46 صبغياً و 16 صبغياً", "23 صبغياً و 8 صبغيات", "80 صبغياً و 46 صبغياً", "46 صبغياً و 2 صبغي"], "ans": 0, "id": 247}, {"q": "تكمن أهمية الانقسام الخيطي في كل مما يأتي ما عدا:", "opts": ["النمو", "إنتاج الأعراس", "تعويض الخلايا التالفة", "زيادة عدد الخلايا"], "ans": 1, "id": 248}, {"q": "تتجدد خلايا بطانة المعدة يومياً لتعويض خلاياها التالفة بفضل عملية:", "opts": ["الانقسام المنصف", "الانقسام الخيطي", "الإخصاب", "التمايز"], "ans": 1, "id": 249}, {"q": "يحافظ الانقسام الخيطي على العدد الصبغي ذاته الموجود في نواة الخلية الأصلية بسبب:", "opts": ["حدوث انقسامين متتاليين", "تضاعف عدد الصبغيات في الطور البيني قبل كل انقسام", "فقدان نصف الصبغيات", "عدم وجود طور بيني"], "ans": 1, "id": 250}, {"q": "ينتج عن الانقسام المنصف لخلية جنسية مولدة للأعراس (2n):", "opts": ["خليتان صيغة كل منهما 2n", "أربع خلايا صيغة كل منها 1n", "خليتان صيغة كل منهما 1n", "أربع خلايا صيغة كل منها 2n"], "ans": 1, "id": 251}, {"q": "إذا كان عدد الصبغيات في خلايا الحصان الجسمية (F) وكان عدد الصبغيات في أعراسه الذكرية 32 صبغياً فإن (F) تساوي:", "opts": ["16 صبغياً", "64 صبغياً", "96 صبغياً", "32 صبغياً"], "ans": 1, "id": 252}, {"q": "إذا كانت الخلية الكبدية لكائن حي تحتوي على 60 صبغياً فإن عدد الصبغيات في العروس الذكرية يكون:", "opts": ["15 صبغياً", "30 صبغياً", "60 صبغياً", "120 صبغياً"], "ans": 1, "id": 253}, {"q": "الصيغة الصبغية لذكر الإنسان في خلاياه الجسمية هي:", "opts": ["44A + XX", "44A + XY", "22A + X", "22A + Y"], "ans": 1, "id": 254}, {"q": "يحدد الذكر لدى الإنسان جنس المولود لأنه يعطي عند الانقسام المنصف:", "opts": ["نمطاً واحداً من الأعراس", "نمطين من الأعراس (22A+X و 22A+Y)", "أعراساً تحوي 46 صبغياً", "أعراساً غير متحركة"], "ans": 1, "id": 255}, {"q": "الصفة التي يكتسبها الفرد من بيئته (مثل العزف الموسيقي والعضلات النامية) تُعرف بأنها:", "opts": ["يرثها الفرد ويورثها", "لا يرثها الفرد ولا يورثها", "يرثها الفرد ولا يورثها", "لا يرثها الفرد ويورثها"], "ans": 1, "id": 256}, {"q": "صفة تظهر فجأة في بعض أفراد النوع ولم تكن موجودة في أفراده سابقاً ويورثها الفرد لأبنائه:", "opts": ["الصفة المكتسبة", "الصفة الطافرة", "الصفة الجنسية الثانوية", "الصفة الجسمية"], "ans": 1, "id": 257}, {"q": "مرض وراثي سببه مورثة مسؤولة عن عدم إنتاج صباغ الميلانين مما يؤدي لغياب لون الجلد والشعر والقزحية:", "opts": ["التلاسيميا", "المهق", "الأنيميا", "السيلان"], "ans": 1, "id": 258}, {"q": "مرض وراثي سببه طفرة في المورثة المسؤولة عن إنتاج خضاب الدم فيتشوه شكل الكريات الحمر:", "opts": ["المهق", "التلاسيميا (فقر دم البحر المتوسط)", "الإيدز", "اليرقان"], "ans": 1, "id": 259}, {"q": "إحدى الصفات الآتية تُعدّ صفة وراثية وليست صفة مكتسبة:", "opts": ["مهارة الغطس", "التحدث بـ 3 لغات", "غزارة شعر الرأس ولون العيون", "النقش على النحاس"], "ans": 2, "id": 260}]}, {"id": "human_repro", "unit": "الوحدة الثالثة: الوراثة والتكاثر", "title": "التكاثر لدى الإنسان", "icon": "👶", "desc": "الجهازان التناسليان الذكري والأنثوي، الإلقاح، الحمل والولادة والأمراض التناسلية", "questions": [{"q": "تتوضع الخصيتان خارج تجويف البطن ضمن كيس الصفن لأن تشكل النطاف يتطلب درجة حرارة تبلغ:", "opts": ["37 درجة مئوية", "35 درجة مئوية", "40 درجة مئوية", "30 درجة مئوية"], "ans": 1, "id": 261}, {"q": "أنبوب دقيق ملتصق بالخصية تختزن فيه النطاف وتكتسب القدرة على الحركة:", "opts": ["الإحليل", "البربخ", "الأسهر", "الحويصل المنوي"], "ans": 1, "id": 262}, {"q": "الترتيب الصحيح لخروج النطاف من مكان إنتاجها في الخصية حتى خروجها من جسم الذكر هو:", "opts": ["الأسهران – البربخان – الإحليل", "البربخان – الأسهران – الإحليل", "البربخان – الإحليل – الأسهران", "الأسهران – الإحليل – البربخان"], "ans": 1, "id": 263}, {"q": "من الغدد الملحقة بالجهاز التناسلي الذكري وتصب مفرزاتها في مكان التقاء الأسهرين مع الإحليل:", "opts": ["غدة البروستات (الموثة)", "غدتا كوبر", "الخصيتان", "الحويصلان المنويان"], "ans": 0, "id": 264}, {"q": "القسم من النطفة البشرية الذي يحتوي على جسيمات كوندرية تزود النطفة بالطاقة اللازمة للحركة هو:", "opts": ["الرأس", "القطعة المتوسطة", "الذيل", "الجسيم الطرفي"], "ans": 1, "id": 265}, {"q": "يوجد في مقدمة رأس النطفة البشرية بنية تفرز أنظيمات تسهل عملية الإلقاح تُدعى:", "opts": ["النواة", "الجسيم الطرفي", "الجسيمات الكوندرية", "الغمد الليفي"], "ans": 1, "id": 266}, {"q": "الوصف الصحيح للعروس الأنثوية عند أنثى الإنسان:", "opts": ["نواتها تحوي 46 صبغياً", "تنتج عن انقسام خيطي", "تتحرر بعملية الإباضة وغير متحركة", "صغيرة الحجم جداً مقارنة بالنطفة"], "ans": 2, "id": 267}, {"q": "الجزء المتوسع في بداية القناة الناقلة للبيوض بالقرب من المبيض والذي يتلقف البيوض عند خروجها هو:", "opts": ["الرحم", "البوق", "عنق الرحم", "المهبل"], "ans": 1, "id": 268}, {"q": "جوف عضلي يشبه ثمرة الإجاص يستقر فيه الجنين وتتجدد بطانته شهرياً منذ سن البلوغ:", "opts": ["المبيض", "الرحم", "البوق", "المهبل"], "ans": 1, "id": 269}, {"q": "تحدث عملية الإباضة لدى الأنثى بعد سن البلوغ بمعدل عروس أنثوية واحدة كل:", "opts": ["7 أيام", "14 يوماً", "28 يوماً", "40 يوماً"], "ans": 2, "id": 270}, {"q": "تنسلخ بطانة الرحم وتتمزق الشعيرات الدموية فيخرج الدم عبر المهبل عند عدم حدوث إخصاب بعملية تُدعى:", "opts": ["الإباضة", "الطمث", "التعشيش", "المخاض"], "ans": 1, "id": 271}, {"q": "تتم عملية الإلقاح (اتحاد النطفة مع العروس الأنثوية) لدى أنثى الإنسان في:", "opts": ["المبيض", "الثلث الأول من القناة الناقلة للبيوض", "المهبل", "عنق الرحم"], "ans": 1, "id": 272}, {"q": "العملية التي تصبح فيها الكتلة الخلوية داخل مخاطية الرحم بشكل كامل تُسمّى:", "opts": ["التأبير", "التعشيش", "الإباضة", "المخاض"], "ans": 1, "id": 273}, {"q": "يُعرف التخصص الشكلي والوظيفي لخلايا الكائن الحي بـ:", "opts": ["الانتاش", "التمايز", "الانغراس", "الإباضة"], "ans": 1, "id": 274}, {"q": "تساعد المشيمة على استمرار الحمل لأنها تعمل على:", "opts": ["إنتاج النطاف", "إنتاج حاثات تساعد على استمرار الحمل", "تحفيز الطمث", "منع الانقسام الخيطي"], "ans": 1, "id": 275}, {"q": "تلد المرأة توأماً حقيقياً (متماثل الجنس) عندما يتشكل الجنينان من:", "opts": ["بيضتين ملقحتين ومشيمتين منفصلتين", "بيضة ملقحة واحدة ومشيمة واحدة", "بيضتين ملقحتين ومشيمة واحدة", "بيضة ملقحة واحدة ومشيمتين منفصلتين"], "ans": 1, "id": 276}, {"q": "تستمر مدة الحمل الطبيعي لدى المرأة حتى الولادة نحو:", "opts": ["28 أسبوعاً", "38 – 40 أسبوعاً (9 شهور)", "45 أسبوعاً", "20 أسبوعاً"], "ans": 1, "id": 277}, {"q": "يقي الإرضاع الطبيعي الطفل من بعض الأمراض لأنه يحتوي على:", "opts": ["خلايا عصبية", "بعض الأضداد التي تكسبه مناعة طبيعية", "صباغ الميلانين", "كريات دم حمراء"], "ans": 1, "id": 278}, {"q": "مرض جرثومي ينتقل جنسياً تسببه جرثومة المكورات البنية وقد يؤدي للعقم إذا أصبح مزمناً:", "opts": ["الإيدز", "السيلان", "تكيس المبايض", "سرطان البروستات"], "ans": 1, "id": 279}, {"q": "مرض عضوي يصيب الجهاز التناسلي الأنثوي بسبب تشكل حويصلات داخل المبيض وخلل في الحاثات الأنثوية:", "opts": ["السيلان", "تكيس المبايض", "الإيدز", "المهق"], "ans": 1, "id": 280}]}, {"id": "plant_repro", "unit": "الوحدة الرابعة: النبات والبيئة", "title": "التكاثر لدى النباتات البذرية", "icon": "🌱", "desc": "عاريات البذور (الصنوبر) ومغلفات البذور، الإخصاب المضاعف والإنتاش", "questions": [{"q": "يُعدّ نبات الصنوبر من عاريات البذور (المخروطيات) لأن:", "opts": ["المبيض مغلق والبذيرات بداخله", "الخباء مفتوح والبذيرات عارية", "أزهاره ملونة ببتلات", "لا يمتلك بذوراً"], "ans": 1, "id": 281}, {"q": "تتوضع المخاريط المذكرة والمخاريط المؤنثة في نبات الصنوبر على الترتيب في:", "opts": ["نهاية الفرع الفتي / قاعدة الفرع الفتي", "قاعدة الفرع الفتي / نهاية الفرع الفتي", "على الجذور / على الساق", "داخل الثمرة / على الأوراق"], "ans": 1, "id": 282}, {"q": "أحد الأجزاء الآتية لا يُعدّ من أجزاء المخروط المذكر في نبات الصنوبر:", "opts": ["محور المخروط", "كيس طلعي", "بذيرة", "حبة طلع"], "ans": 2, "id": 283}, {"q": "يتوضع على الوجه السفلي لكل حرشفة في المخروط المذكر للصنوبر:", "opts": ["بذيرتان عاريتان", "كيسان طلعيان", "مبيض وقلم", "قنابة فقط"], "ans": 1, "id": 284}, {"q": "يتوضع على الوجه العلوي لكل حرشفة في المخروط المؤنث للصنوبر:", "opts": ["كيسان طلعيان", "بذيرتان عاريتان", "حبتا طلع", "سداتان"], "ans": 1, "id": 285}, {"q": "القسم المنتفخ الذي يتصل بعنق الزهرة وتتوضع عليه القطع الزهرية الأخرى لدى مغلفات البذور يُدعى:", "opts": ["السبلة", "كرسي الزهرة", "البتلة", "الميسم"], "ans": 1, "id": 286}, {"q": "أحد البنى الآتية لا يُعدّ من أقسام المدقة (العضو التكاثري الأنثوي في الزهرة):", "opts": ["المبيض", "القلم", "المئبر", "الميسم"], "ans": 2, "id": 287}, {"q": "تنتقل حبة الطلع من مئبر الزهرة إلى ميسم الزهرة بعملية تُسمّى:", "opts": ["الإنتاش", "التأبير", "التعشيش", "الإباضة"], "ans": 1, "id": 288}, {"q": "تنقسم الخلية المولدة (1n) في حبة الطلع عند الإنتاش انقساماً خيطياً لتعطي:", "opts": ["أربع بذيرات", "عروسين ذكريتين (نطفتين نباتيتين)", "نواة ثانوية", "سويداء"], "ans": 1, "id": 289}, {"q": "ينتج عن اتحاد العروس الذكرية الأولى مع العروس الأنثوية لدى مغلفات البذور:", "opts": ["بيضة إضافية تنمو لتعطي السويداء", "بيضة أصلية تنمو لتعطي الرشيم (الجنين النباتي)", "حبة طلع ناضجة", "ثمرة بلا بذور"], "ans": 1, "id": 290}, {"q": "ينتج عن نمو البيضة الإضافية (اتحاد عروس ذكرية ثانية مع النواة الثانوية) لدى مغلفات البذور نسيج مغذٍّ يُدعى:", "opts": ["الرشيم", "السويداء", "القنابة", "الكيس الطلعي"], "ans": 1, "id": 291}, {"q": "ينمو الجذير والسويقة والبريعم في الرشيم أثناء إنتاش البذرة لتعطي على الترتيب:", "opts": ["الساق – الجذر – الأوراق", "الجذر – الساق – الأوراق", "الأوراق – الساق – الجذر", "الجذر – الأوراق – الساق"], "ans": 1, "id": 292}]}, {"id": "environment", "unit": "الوحدة الرابعة: النبات والبيئة", "title": "التلوث وحماية البيئة", "icon": "🌍", "desc": "تلوث الهواء والماء، الاحتباس الحراري، ثقب الأوزون والمطر الحمضي وحماية البيئة", "questions": [{"q": "يُعدّ تلوث الهواء من أوسع المشكلات البيئية وأخطرها وأكثرها انتشاراً وذلك:", "opts": ["لقلة مصادره", "لعدم إمكانية عزل الهواء بيئياً", "لأنه لا يؤثر على الإنسان", "لأنه يقتصر على المدن فقط"], "ans": 1, "id": 293}, {"q": "الغاز الذي يؤدي ارتفاع نسبته في الجو إلى حدوث ظاهرة الدفيئة (الاحتباس الحراري) هو:", "opts": ["الأوكسجين O₂", "الآزوت N₂", "ثنائي أوكسيد الكربون CO₂", "الهيدروجين H₂"], "ans": 2, "id": 294}, {"q": "يتشكل المطر الحمضي بسبب انحلال بعض الغازات الملوثة في ماء المطر، ومن أهمها:", "opts": ["O₂ و N₂", "SO₂ و NO₂ و H₂S", "بخار الماء فقط", "الأوزون فقط"], "ans": 1, "id": 295}, {"q": "الغـاز الذي لا يسبب تلوث البيئة من بين الغازات الآتية هو:", "opts": ["NO₂", "H₂S", "O₂", "SO₂"], "ans": 2, "id": 296}, {"q": "يؤدي استنزاف طبقة الأوزون (ثقب الأوزون) إلى تسرب:", "opts": ["غاز الأوكسجين إلى الفضاء", "الأشعة الكونية الضارة وإلحاق الأذى بالكائنات الحية", "مياه الصرف الصحي", "المطر القلوي"], "ans": 1, "id": 297}, {"q": "من الأمراض التي تزداد أعراضها حدة نتيجة التلوث الهوائي:", "opts": ["المهق والتلاسيميا", "الربو والتهاب ملتحمة العين", "القزامة والعملقة", "الكساح"], "ans": 1, "id": 298}, {"q": "من أخطر مصادر تلوث مياه البحار والمحيطات:", "opts": ["زراعة الأشجار", "تسرب النفط من ناقلات النفط ومياه الصرف الصحي", "معالجة المياه العادمة", "تدوير النفايات"], "ans": 1, "id": 299}, {"q": "من الإجراءات السليمة لحماية المياه والبيئة من التلوث:", "opts": ["تصريف مياه الصرف الصحي في الأنهار", "رمي مخلفات المصانع في البحار", "إقامة محطات لمعالجة مياه الصرف الصحي وتدوير النفايات", "تقليص مساحة الغطاء النباتي"], "ans": 2, "id": 300}]}];
+    const LETTERS = ["أ", "ب", "ج", "د"];
+    const STORAGE_KEY = "bio9_dralidawod_progress_v1";
+
+    const ALL_QUESTIONS = [];
+    TOPICS.forEach(t => {
+      t.questions.forEach(q => {
+        ALL_QUESTIONS.push({ ...q, topicTitle: t.title, topicId: t.id });
+      });
+    });
+
+    let state = {
+      currentTopicId: null,
+      quizTitle: "",
+      questions: [],
+      answeredMap: {},
+      correct: 0,
+      wrong: 0,
+      sessionMistakes: [],
+      timerInterval: null,
+      secondsElapsed: 0,
+      useTimer: false
+    };
+
+    function loadProgress() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) return JSON.parse(raw);
+      } catch (e) {}
+      return { bestScores: {}, wrongIds: [] };
+    }
+
+    function saveProgress(prog) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(prog));
+      } catch (e) {}
+    }
+
+    function resetProgress() {
+      if (confirm("هل تريد مسح جميع العلامات وسجل الأخطاء المحفوظة؟")) {
+        localStorage.removeItem(STORAGE_KEY);
+        renderHome();
+      }
+    }
+
+    function renderHome() {
+      const prog = loadProgress();
+      document.getElementById("mistakesCount").textContent = prog.wrongIds.length;
+      const completedTopics = Object.keys(prog.bestScores).length;
+      document.getElementById("overallStats").textContent =
+        `📚 إجمالي الأسئلة: ${ALL_QUESTIONS.length} سؤال • ${TOPICS.length} بحثاً • الأبحاث المُنجَزة: ${completedTopics} / ${TOPICS.length}`;
+
+      const container = document.getElementById("unitsContainer");
+      container.innerHTML = "";
+
+      const unitsOrder = [];
+      const unitMap = {};
+      TOPICS.forEach(t => {
+        if (!unitMap[t.unit]) {
+          unitMap[t.unit] = [];
+          unitsOrder.push(t.unit);
+        }
+        unitMap[t.unit].push(t);
+      });
+
+      unitsOrder.forEach(unitName => {
+        const block = document.createElement("div");
+        block.className = "unit-block";
+
+        const header = document.createElement("div");
+        header.className = "unit-header";
+        header.textContent = unitName;
+        block.appendChild(header);
+
+        const grid = document.createElement("div");
+        grid.className = "topics-grid";
+
+        unitMap[unitName].forEach(t => {
+          const card = document.createElement("div");
+          card.className = "topic-card";
+          card.onclick = () => startTopicQuiz(t.id);
+
+          const best = prog.bestScores[t.id];
+          const bestHtml = best !== undefined
+            ? `<span class="best-pill">🏆 أعلى نتيجة: ${best}%</span>`
+            : `<span style="color:#64748b; font-size:0.78rem;">ابدأ التدريب ←</span>`;
+
+          card.innerHTML = `
+            <div class="topic-top">
+              <div class="topic-icon">${t.icon}</div>
+              <div>
+                <div class="topic-title">${t.title}</div>
+                <div class="topic-desc">${t.desc}</div>
+              </div>
+            </div>
+            <div class="topic-footer">
+              <span class="q-count-pill">${t.questions.length} سؤال</span>
+              ${bestHtml}
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+
+        block.appendChild(grid);
+        container.appendChild(block);
+      });
+    }
+
+    function shuffleArray(arr) {
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function startTopicQuiz(topicId) {
+      const topic = TOPICS.find(t => t.id === topicId);
+      if (!topic) return;
+      const qs = topic.questions.map(q => ({ ...q, topicTitle: topic.title, topicId: topic.id }));
+      beginQuiz(qs, topic.title, topicId, false);
+    }
+
+    function startRandomQuiz(count, title, useTimer) {
+      const qs = shuffleArray(ALL_QUESTIONS).slice(0, count);
+      beginQuiz(qs, title, null, useTimer);
+    }
+
+    function startMistakesQuiz() {
+      const prog = loadProgress();
+      if (!prog.wrongIds.length) {
+        alert("ممتاز! لا توجد أسئلة خاطئة محفوظة حالياً للمراجعة.");
+        return;
+      }
+      const wrongSet = new Set(prog.wrongIds);
+      const qs = ALL_QUESTIONS.filter(q => wrongSet.has(q.id));
+      beginQuiz(shuffleArray(qs), "مراجعة الأخطاء السابقة", null, false);
+    }
+
+    function beginQuiz(questions, title, topicId, useTimer) {
+      stopTimer();
+      state = {
+        currentTopicId: topicId,
+        quizTitle: title,
+        questions: questions,
+        answeredMap: {},
+        correct: 0,
+        wrong: 0,
+        sessionMistakes: [],
+        timerInterval: null,
+        secondsElapsed: 0,
+        useTimer: useTimer
+      };
+
+      document.getElementById("homeView").classList.add("hidden");
+      document.getElementById("resultView").classList.add("hidden");
+      document.getElementById("quizView").classList.remove("hidden");
+      document.getElementById("quizTitleDisplay").textContent = title;
+
+      const timerEl = document.getElementById("timerDisplay");
+      if (useTimer) {
+        timerEl.classList.remove("hidden");
+        timerEl.textContent = "⏱️ 00:00";
+        state.timerInterval = setInterval(() => {
+          state.secondsElapsed++;
+          const m = String(Math.floor(state.secondsElapsed / 60)).padStart(2, "0");
+          const s = String(state.secondsElapsed % 60).padStart(2, "0");
+          timerEl.textContent = `⏱️ ${m}:${s}`;
+        }, 1000);
+      } else {
+        timerEl.classList.add("hidden");
+      }
+
+      updateLiveStats();
+      renderAllQuestions();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function stopTimer() {
+      if (state.timerInterval) {
+        clearInterval(state.timerInterval);
+        state.timerInterval = null;
+      }
+    }
+
+    function toggleShuffleCurrent() {
+      const answeredCount = Object.keys(state.answeredMap).length;
+      if (answeredCount > 0 && !confirm("سيتم خلط جميع أسئلة هذا القسم وإعادة البدء، هل تود المتابعة؟")) return;
+      beginQuiz(shuffleArray(state.questions), state.quizTitle, state.currentTopicId, state.useTimer);
+    }
+
+    function updateLiveStats() {
+      const answeredCount = Object.keys(state.answeredMap).length;
+      const total = state.questions.length;
+      document.getElementById("answeredCounter").textContent = `تم حل ${answeredCount} / ${total}`;
+      document.getElementById("liveCorrect").textContent = state.correct;
+      document.getElementById("liveWrong").textContent = state.wrong;
+      const pct = total > 0 ? (answeredCount / total) * 100 : 0;
+      document.getElementById("progressBar").style.width = pct + "%";
+    }
+
+    function renderAllQuestions() {
+      const container = document.getElementById("questionsContainer");
+      container.innerHTML = "";
+      const total = state.questions.length;
+
+      state.questions.forEach((q, qIdx) => {
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.id = `qcard-${qIdx}`;
+
+        const headerRow = document.createElement("div");
+        headerRow.className = "q-header-row";
+        headerRow.innerHTML = `
+          <span class="q-tag">السؤال ${qIdx + 1} من ${total}</span>
+          <span class="q-tag" style="background:#f8fafc; color:#475569;">${q.topicTitle || state.quizTitle}</span>
+        `;
+        card.appendChild(headerRow);
+
+        const qText = document.createElement("div");
+        qText.className = "q-text-main";
+        qText.textContent = q.q;
+        card.appendChild(qText);
+
+        const optList = document.createElement("div");
+        optList.className = "options-list";
+        optList.id = `opts-${qIdx}`;
+
+        q.opts.forEach((optText, optIdx) => {
+          const btn = document.createElement("button");
+          btn.className = "opt-btn";
+          btn.innerHTML = `<span class="opt-letter">${LETTERS[optIdx]}</span><span>${optText}</span>`;
+          btn.onclick = () => selectOption(qIdx, optIdx, btn);
+          optList.appendChild(btn);
+        });
+        card.appendChild(optList);
+
+        const fb = document.createElement("div");
+        fb.className = "feedback-box hidden";
+        fb.id = `fb-${qIdx}`;
+        card.appendChild(fb);
+
+        container.appendChild(card);
+      });
+    }
+
+    function selectOption(qIdx, chosenIdx, clickedBtn) {
+      if (state.answeredMap[qIdx] !== undefined) return;
+      state.answeredMap[qIdx] = chosenIdx;
+
+      const q = state.questions[qIdx];
+      const card = document.getElementById(`qcard-${qIdx}`);
+      const allBtns = document.querySelectorAll(`#opts-${qIdx} .opt-btn`);
+      allBtns.forEach(b => b.disabled = true);
+
+      const prog = loadProgress();
+      const fb = document.getElementById(`fb-${qIdx}`);
+
+      if (chosenIdx === q.ans) {
+        state.correct++;
+        clickedBtn.classList.add("correct");
+        card.classList.add("card-correct");
+        fb.className = "feedback-box feedback-ok";
+        fb.textContent = "✔ إجابة صحيحة! أحسنت.";
+        prog.wrongIds = prog.wrongIds.filter(id => id !== q.id);
+      } else {
+        state.wrong++;
+        clickedBtn.classList.add("wrong");
+        allBtns[q.ans].classList.add("correct");
+        card.classList.add("card-wrong");
+        fb.className = "feedback-box feedback-bad";
+        fb.textContent = `✘ إجابة خاطئة — الإجابة الصحيحة هي (${LETTERS[q.ans]}): ${q.opts[q.ans]}`;
+        state.sessionMistakes.push({
+          q: q,
+          chosenIdx: chosenIdx
+        });
+        if (!prog.wrongIds.includes(q.id)) {
+          prog.wrongIds.push(q.id);
+        }
+      }
+
+      saveProgress(prog);
+      updateLiveStats();
+    }
+
+    function finishQuiz() {
+      stopTimer();
+      const totalAnswered = Object.keys(state.answeredMap).length;
+      const denom = state.questions.length;
+      const pct = denom > 0 ? Math.round((state.correct / denom) * 100) : 0;
+
+      if (state.currentTopicId && totalAnswered > 0) {
+        const prog = loadProgress();
+        const prev = prog.bestScores[state.currentTopicId] || 0;
+        if (pct > prev) prog.bestScores[state.currentTopicId] = pct;
+        saveProgress(prog);
+      }
+
+      document.getElementById("quizView").classList.add("hidden");
+      document.getElementById("resultView").classList.remove("hidden");
+
+      document.getElementById("resPct").textContent = pct + "%";
+      document.getElementById("resFrac").textContent = `${state.correct} / ${denom}`;
+
+      let msg = "أداء ممتاز جداً! 🌟";
+      if (pct < 50) msg = "تحتاج إلى مراجعة إضافية للدرس 📖";
+      else if (pct < 75) msg = "جيد، ومع مراجعة الأخطاء ستصل للعلامة التامة 👍";
+      else if (pct < 95) msg = "عمل رائع جداً! اقتربت من العلامة التامة 👏";
+
+      document.getElementById("resMsg").textContent = msg;
+      let subTxt = `${state.quizTitle} — أجبت على ${totalAnswered} من أصل ${denom} سؤالاً.`;
+      if (state.useTimer) {
+        const m = String(Math.floor(state.secondsElapsed / 60)).padStart(2, "0");
+        const s = String(state.secondsElapsed % 60).padStart(2, "0");
+        subTxt += ` (الوقت المستغرق: ${m}:${s})`;
+      }
+      document.getElementById("resSub").textContent = subTxt;
+
+      const mSec = document.getElementById("mistakesSection");
+      const mList = document.getElementById("mistakesList");
+      const retryMBtn = document.getElementById("retryMistakesBtn");
+
+      if (state.sessionMistakes.length > 0) {
+        mSec.classList.remove("hidden");
+        retryMBtn.classList.remove("hidden");
+        mList.innerHTML = "";
+        state.sessionMistakes.forEach((m, idx) => {
+          const item = document.createElement("div");
+          item.className = "mistake-item";
+          item.innerHTML = `
+            <div class="mistake-q">${idx + 1}. ${m.q.q}</div>
+            <div class="mistake-row m-wrong">✘ إجابتك: (${LETTERS[m.chosenIdx]}) ${m.q.opts[m.chosenIdx]}</div>
+            <div class="mistake-row m-right">✔ الإجابة الصحيحة: (${LETTERS[m.q.ans]}) ${m.q.opts[m.q.ans]}</div>
+          `;
+          mList.appendChild(item);
+        });
+      } else {
+        mSec.classList.add("hidden");
+        retryMBtn.classList.add("hidden");
+      }
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function retryQuiz() {
+      beginQuiz(state.questions, state.quizTitle, state.currentTopicId, state.useTimer);
+    }
+
+    function retrySessionMistakes() {
+      const qs = state.sessionMistakes.map(m => m.q);
+      if (!qs.length) return;
+      beginQuiz(qs, "مراجعة أخطاء الجلسة", null, false);
+    }
+
+    function goHome() {
+      stopTimer();
+      document.getElementById("quizView").classList.add("hidden");
+      document.getElementById("resultView").classList.add("hidden");
+      document.getElementById("homeView").classList.remove("hidden");
+      renderHome();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    renderHome();
+  </script>
+</body>
+</html>
